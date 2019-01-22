@@ -35,8 +35,8 @@ export default class Component {
         this.element.classList.remove(this._hiddenClass);
     }
 
-    destroy() {
-        if (this._ownsElement) {
+    destroy(alwaysRemove) {
+        if (alwaysRemove || this._ownsElement) {
             this.element.remove();
         }
         else {

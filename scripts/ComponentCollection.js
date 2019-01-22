@@ -56,12 +56,12 @@ export default class ComponentCollection extends Component {
         }
     }
 
-    destroy() {
+    destroy(alwaysRemove, alwaysRemoveSub) {
 
         for (let { component } of this.subComponents) {
-            component.destroy();
+            component.destroy(alwaysRemoveSub);
         }
 
-        super.destroy();
+        super.destroy(alwaysRemove);
     }
 }
