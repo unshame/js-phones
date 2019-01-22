@@ -1,4 +1,4 @@
-import ComponentCollection from "../../ComponentCollection.js";
+import ComponentCollection from "../ComponentCollection.js";
 import SearchField from './SearchField.js';
 import SelectField from './SelectField.js';
 

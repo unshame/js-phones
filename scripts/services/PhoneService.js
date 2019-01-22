@@ -1,4 +1,4 @@
-import phones from '../../../phones/phones.js';
+import phones from '../../phones/phones.js';
 
 const PhoneService = {
     getPhones() {

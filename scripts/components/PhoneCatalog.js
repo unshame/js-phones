@@ -1,4 +1,4 @@
-import ComponentCollection from '../../ComponentCollection.js';
+import ComponentCollection from '../ComponentCollection.js';
 import PhonePreview from './PhonePreviewer.js';
 
 export default class PhoneCatalog extends ComponentCollection {

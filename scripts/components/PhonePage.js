@@ -1,7 +1,7 @@
 import PhoneCatalog from './PhoneCatalog.js';
 import PhoneViewer from './PhoneViewer.js';
 import PhoneService from "../services/PhoneService.js";
-import ComponentCollection from '../../ComponentCollection.js';
+import ComponentCollection from '../ComponentCollection.js';
 import PhoneFilter from './PhoneFilter.js';
 
 export default class PhonesPage extends ComponentCollection {

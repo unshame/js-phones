@@ -1,4 +1,4 @@
-import Component from "../../Component.js";
+import Component from "../Component.js";
 
 export default class PhoneViewer extends Component {
     constructor({element, phone = null}) {
