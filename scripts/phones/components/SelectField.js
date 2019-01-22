@@ -4,12 +4,12 @@ export default class SelectField extends Component {
 
     constructor({ element, orderAttributes, onChange }) {
         super({ element });
-        this.orderAttributes = orderAttributes;
+        this._orderAttributes = orderAttributes;
         this.element.addEventListener('change', (event) => onChange(this.element.value, event));
     }
 
     generateHTML() {
-        return this.orderAttributes.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');
+        return this._orderAttributes.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');
     }
 
     get defaultTag() {

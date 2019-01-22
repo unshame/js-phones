@@ -1,10 +1,10 @@
 export default class Component {
-    constructor({ element, hiddenClass = 'js-hidden'}) {
-        this.element = element instanceof Element ? element : this.createElement(element);
+    constructor({ element, hiddenClass = 'js-hidden' }) {
+        this.element = element instanceof Element ? element : this._createElement(element);
         this._hiddenClass = hiddenClass;
     }
 
-    createElement({ tag, name, id }) {
+    _createElement({ tag, name, id }) {
         let element = document.createElement(tag || this.defaultTag);
 
         if (name) {

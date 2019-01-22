@@ -6,7 +6,6 @@ export default class PhoneFilter extends ComponentCollection {
 
     constructor({ element, orderAttributes, onChange }) {
         super({ element });
-        this.orderAttributes = orderAttributes;
 
         this._searchField = this.addSubComponent({
             constructor: SearchField,

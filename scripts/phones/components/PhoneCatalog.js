@@ -14,11 +14,11 @@ export default class PhoneCatalog extends ComponentCollection {
             });
         }
 
-        this.subComponentsFiltered = [...this.subComponents];
+        this._subComponentsFiltered = [...this.subComponents];
     }
 
     generateHTML() {
-        let phoneDivs = this.subComponentsFiltered.map(({ name, id }) => `<div data-component="${name}" data-component-id=${id}></div>`)
+        let phoneDivs = this._subComponentsFiltered.map(({ name, id }) => `<div data-component="${name}" data-component-id=${id}></div>`)
         return `
             <ul class="phones">
                 ${phoneDivs.join('')}
@@ -27,10 +27,10 @@ export default class PhoneCatalog extends ComponentCollection {
 
     filter({ query, order }) {
         if (!query) {
-            this.subComponentsFiltered = [...this.subComponents];
+            this._subComponentsFiltered = [...this.subComponents];
         }
         else {
-            this.subComponentsFiltered = this.subComponents.filter(({ component }) => {
+            this._subComponentsFiltered = this.subComponents.filter(({ component }) => {
                 
                 for (let word of query.toLowerCase().split(/\s/)) {
                     if (!component.phone.name.toLowerCase().includes(word)) {
@@ -42,7 +42,7 @@ export default class PhoneCatalog extends ComponentCollection {
             });
         }
 
-        this.subComponentsFiltered.sort(({ component: ca }, { component: cb }) => {
+        this._subComponentsFiltered.sort(({ component: ca }, { component: cb }) => {
             let a = String(ca.phone[order]).toLowerCase();
             let b = String(cb.phone[order]).toLowerCase();
 

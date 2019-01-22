@@ -10,15 +10,13 @@ export default class ComponentCollection extends Component {
     }
 
     setAutoRenderOptions({ embed = true, render = true }) {
-        this._autoEmbedComponents = embed;
-        this._autoRenderComponents = render;
+        this._autoEmbedSubComponents = embed;
+        this._autoRenderSubComponents = render;
     }
 
     addSubComponent({
         constructor,
-        name,
-        id,
-        tag,
+        name, id, tag,
         options = {}
     }) {
         options.element = { tag, name, id };
@@ -28,7 +26,7 @@ export default class ComponentCollection extends Component {
         return component;
     }
 
-    embedSubComponents() {
+    _embedSubComponents() {
         for (let { component, name, id } of this.subComponents) {
             let dataId = id ? `[data-component-id="${id}"]` : '';
             let node = this.element.querySelector(`[data-component="${name}"]${dataId}`);
@@ -39,7 +37,7 @@ export default class ComponentCollection extends Component {
         }
     }
 
-    renderSubComponents() {
+    _renderSubComponents() {
         for (let { component } of this.subComponents) {
             component.render();
         }
@@ -48,12 +46,12 @@ export default class ComponentCollection extends Component {
     render() {
         super.render();
 
-        if (this._autoEmbedComponents) {
-            this.embedSubComponents();
+        if (this._autoEmbedSubComponents) {
+            this._embedSubComponents();
         }
 
-        if (this._autoRenderComponents) {
-            this.renderSubComponents();
+        if (this._autoRenderSubComponents) {
+            this._renderSubComponents();
         }
     }
 
