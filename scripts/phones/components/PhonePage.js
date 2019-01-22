@@ -7,7 +7,7 @@ import PhoneFilter from './PhoneFilter.js';
 export default class PhonesPage extends ComponentCollection {
     constructor({element}) {
         super({element});
-        this._autoRenderComponents = false;
+        this.setAutoRenderOptions({ render: false });
 
         this._catalog = this.addSubComponent({
             constructor: PhoneCatalog,
@@ -39,7 +39,7 @@ export default class PhonesPage extends ComponentCollection {
                 }
             }
         });
-        
+
         this._activeSubComponent = this._catalog;
         this.render();
     }
