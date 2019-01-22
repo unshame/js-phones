@@ -15,14 +15,4 @@ export default class Component {
     show() {
         this.element.classList.remove(this._hiddenClass);
     }
-
-    createElement(tag, componentName) {
-        let element = document.createElement('div');
-
-        if(componentName) {
-            element.dataset.component = 'phone-catalog';
-        }
-
-        return element;
-    }
 }

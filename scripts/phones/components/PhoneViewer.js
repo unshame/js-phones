@@ -1,9 +1,9 @@
-import Component from "../../component.js";
+import Component from "../../Component.js";
 
 export default class PhoneViewer extends Component {
     constructor({element, phone = null}) {
-        super({element});
-        this.phone = phone;
+      super({element});
+      this.setPhone(phone);
     }
 
     setPhone(phone) {
