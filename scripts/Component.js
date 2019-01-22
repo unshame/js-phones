@@ -5,8 +5,8 @@ export default class Component {
         this._hiddenClass = hiddenClass;
     }
 
-    _createElement({ tag, name, id }) {
-        let element = document.createElement(tag || this.defaultTag);
+    _createElement({ tag = this.defaultTag, name, id }) {
+        let element = document.createElement(tag);
 
         if (name) {
             element.dataset.component = name;
