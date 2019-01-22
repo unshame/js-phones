@@ -12,7 +12,7 @@ export default class PhonesPage extends ComponentCollection {
             onPhoneUnselected: () => this.hidePhone()
         });
         this._viewer = this.addSubComponent(PhoneViewer, 'phone-viewer', 'div');
-        this.activeSubComponent = this._catalog;
+        this._activeSubComponent = this._catalog;
         this.render();
     }
 
@@ -21,14 +21,14 @@ export default class PhonesPage extends ComponentCollection {
         this._viewer.setPhone(PhoneService.getPhone(id))
         this._viewer.show();
         this._viewer.render();
-        this.activeSubComponent = this._viewer;
+        this._activeSubComponent = this._viewer;
     }
 
     hidePhone() {
         this._viewer.hide();
         this._catalog.show();
         this._catalog.render();
-        this.activeSubComponent = this._catalog;
+        this._activeSubComponent = this._catalog;
     }
 
     render() {
@@ -69,6 +69,6 @@ export default class PhonesPage extends ComponentCollection {
         </div>`;
 
         this.embedSubComponents();
-        this.activeSubComponent.render();
+        this._activeSubComponent.render();
     }
 }
