@@ -17,14 +17,12 @@ export default class PhoneCatalog extends ComponentCollection {
         this.subComponentsFiltered = [...this.subComponents];
     }
 
-    render() {
+    generateHTML() {
         let phoneDivs = this.subComponentsFiltered.map(({ name, id }) => `<div data-component="${name}" data-component-id=${id}></div>`)
-        this.element.innerHTML = `
-        <ul class="phones">
-            ${phoneDivs.join('')}
-        </ul>`;
-        this.embedSubComponents();
-        this.renderSubComponents();
+        return `
+            <ul class="phones">
+                ${phoneDivs.join('')}
+            </ul>`;
     }
 
     filter({ query, order }) {

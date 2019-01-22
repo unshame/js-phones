@@ -33,8 +33,8 @@ export default class PhoneFilter extends ComponentCollection {
         };
     }
 
-    render() {
-        this.element.innerHTML = `
+    generateHTML() {
+        return `
             <p>
                 Search:
                 <input data-component="search-field">
@@ -47,9 +47,6 @@ export default class PhoneFilter extends ComponentCollection {
                     <option value="age">Newest</option>
                 </select>
             </p>`;
-
-        this.embedSubComponents();
-        this.renderSubComponents();
     }
 
 }

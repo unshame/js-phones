@@ -1,7 +1,7 @@
 export default class Component {
-    constructor({ element, _hiddenClass = 'js-hidden'}) {
+    constructor({ element, hiddenClass = 'js-hidden'}) {
         this.element = element instanceof Element ? element : this.createElement(element);
-        this._hiddenClass = _hiddenClass;
+        this._hiddenClass = hiddenClass;
     }
 
     createElement({ tag, name, id }) {
@@ -19,7 +19,11 @@ export default class Component {
     }
 
     render() {
-        throw new Error('Not implemented');
+        this.element.innerHTML = this.generateHTML();
+    }
+
+    generateHTML() {
+        return '';
     }
 
     hide() {

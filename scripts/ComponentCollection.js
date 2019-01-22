@@ -6,6 +6,8 @@ export default class ComponentCollection extends Component {
         super({element});
         this.subComponents = [];
         this.subComponentsById = {};
+        this._autoEmbedComponents = true;
+        this._autoRenderComponents = true;
     }
 
     addSubComponent({
@@ -36,6 +38,18 @@ export default class ComponentCollection extends Component {
     renderSubComponents() {
         for (let { component } of this.subComponents) {
             component.render();
+        }
+    }
+
+    render() {
+        super.render();
+
+        if (this._autoEmbedComponents) {
+            this.embedSubComponents();
+        }
+
+        if (this._autoRenderComponents) {
+            this.renderSubComponents();
         }
     }
 

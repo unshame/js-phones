@@ -8,8 +8,8 @@ export default class SelectField extends Component {
         this.element.addEventListener('change', (event) => onChange(this.element.value, event));
     }
 
-    render() {
-        this.element.innerHTML = this.orderAttributes.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');
+    generateHTML() {
+        return this.orderAttributes.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');
     }
 
     get defaultTag() {

@@ -7,6 +7,8 @@ import PhoneFilter from './PhoneFilter.js';
 export default class PhonesPage extends ComponentCollection {
     constructor({element}) {
         super({element});
+        this._autoRenderComponents = false;
+
         this._catalog = this.addSubComponent({
             constructor: PhoneCatalog,
             name: 'phone-catalog',
@@ -16,10 +18,12 @@ export default class PhonesPage extends ComponentCollection {
                 onPhoneUnselected: () => this.hidePhone()
             }
         });
+
         this._viewer = this.addSubComponent({
             constructor: PhoneViewer,
             name: 'phone-viewer'
         });
+
         this._filter = this.addSubComponent({
             constructor: PhoneFilter,
             name: 'phone-filter',
@@ -35,6 +39,7 @@ export default class PhonesPage extends ComponentCollection {
                 }
             }
         });
+        
         this._activeSubComponent = this._catalog;
         this.render();
     }
@@ -54,9 +59,16 @@ export default class PhonesPage extends ComponentCollection {
         this._activeSubComponent = this._catalog;
     }
 
-    render(value) {
-        this.element.innerHTML = `
-            <div class="row">
+    render() {
+        super.render();
+        this._filter.render();
+        this._catalog.filter(this._filter.getValues());
+        this._activeSubComponent.render();
+    }
+
+    generateHTML() {
+        return `
+        <div class="row">
             <!--Sidebar-->
             <div class="col-md-2">
                 <section data-component="phone-filter"></section>
@@ -77,10 +89,5 @@ export default class PhonesPage extends ComponentCollection {
                 <div data-component="phone-viewer"></div>
             </div>
         </div>`;
-        
-        this.embedSubComponents();
-        this._filter.render();
-        this._catalog.filter(this._filter.getValues());
-        this._activeSubComponent.render();
     }
 }

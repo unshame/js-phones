@@ -10,8 +10,8 @@ export default class PhoneViewer extends Component {
       this.phone = phone;
     }
 
-    render() {
-        this.element.innerHTML = `
+    generateHTML() {
+        return `
             
             <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
       <button>Back</button>

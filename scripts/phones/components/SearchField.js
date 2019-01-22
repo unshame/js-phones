@@ -7,10 +7,6 @@ export default class SearchField extends Component {
         this.element.addEventListener('input', (event) => onChange(this.element.value, event));
     }
 
-    render() {
-
-    }
-
     get defaultTag() {
         return 'input';
     }

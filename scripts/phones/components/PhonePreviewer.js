@@ -12,9 +12,9 @@ export default class PhonePreview extends Component {
         });
     }
 
-    render() {
+    generateHTML() {
         let phone = this.phone;
-        this.element.innerHTML = `
+        return `
             <li class="thumbnail"
                 data-element="phone"
                 data-phone-id="${phone.id}">
