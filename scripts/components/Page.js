@@ -1,5 +1,5 @@
 import Catalog from './Catalog.js';
-import View from './Viewer.js';
+import View from './View.js';
 import ItemService from "../services/ItemService.js";
 import ComponentCollection from '../ComponentCollection.js';
 import Filter from './Filter.js';

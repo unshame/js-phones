@@ -1,6 +1,6 @@
 import Component from "../Component.js";
 
-export default class Viewer extends Component {
+export default class View extends Component {
     constructor({element, item = null}) {
       super({element});
       this.setItem(item);
