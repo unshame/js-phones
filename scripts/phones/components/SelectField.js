@@ -12,4 +12,8 @@ export default class SelectField extends Component {
         this.element.innerHTML = this.orderAttributes.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');
     }
 
+    get defaultTag() {
+        return 'select';
+    }
+
 }

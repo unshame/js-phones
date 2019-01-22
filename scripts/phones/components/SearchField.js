@@ -8,7 +8,11 @@ export default class SearchField extends Component {
     }
 
     render() {
-        
+
+    }
+
+    get defaultTag() {
+        return 'input';
     }
 
 }

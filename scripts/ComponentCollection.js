@@ -8,28 +8,14 @@ export default class ComponentCollection extends Component {
         this.subComponentsById = {};
     }
 
-    createElement(tag, componentName, componentId) {
-        let element = document.createElement(tag);
-
-        if (componentName) {
-            element.dataset.component = componentName;
-        }
-
-        if (componentId) {
-            element.dataset.componentId = componentId;
-        }
-
-        return element;
-    }
-
     addSubComponent({
         constructor,
         name,
         id,
-        tag = 'div',
+        tag,
         options = {}
     }) {
-        options.element = this.createElement(tag, name, id);
+        options.element = { tag, name, id };
         let component = new constructor(options);
         this.subComponents.push({component, name, id});
         this.subComponentsById[id || name] = component;

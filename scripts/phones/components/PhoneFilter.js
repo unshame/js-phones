@@ -11,7 +11,6 @@ export default class PhoneFilter extends ComponentCollection {
         this._searchField = this.addSubComponent({
             constructor: SearchField,
             name: 'search-field',
-            tag: 'input',
             options: {
                 onChange: () => onChange(this.getValues())
             }
@@ -20,7 +19,6 @@ export default class PhoneFilter extends ComponentCollection {
         this._selectField = this.addSubComponent({
             constructor: SelectField,
             name: 'select-field',
-            tag: 'select',
             options: {
                 orderAttributes,
                 onChange: () => onChange(this.getValues())
