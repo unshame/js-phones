@@ -1,6 +1,7 @@
 export default class Component {
     constructor({ element, hiddenClass = 'js-hidden' }) {
-        this.element = element instanceof Element ? element : this._createElement(element);
+        this._ownsElement = !(element instanceof Element);
+        this.element = this._ownsElement ? this._createElement(element) : element;
         this._hiddenClass = hiddenClass;
     }
 
@@ -32,6 +33,15 @@ export default class Component {
 
     show() {
         this.element.classList.remove(this._hiddenClass);
+    }
+
+    destroy() {
+        if (this._ownsElement) {
+            this.element.remove();
+        }
+        else {
+            this.element.innerHTML = '';
+        }
     }
 
     get defaultTag() {
