@@ -6,7 +6,8 @@ export default class ComponentCollection extends Component {
         super({element});
         this.subComponents = [];
         this.subComponentsById = {};
-        this.setAutoRenderOptions();
+        this._autoEmbedSubComponents = true;
+        this._autoRenderSubComponents = true;
     }
 
     setAutoRenderOptions({ embed = true, render = true }) {
