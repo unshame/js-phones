@@ -5,8 +5,8 @@ export default class PhoneCatalog extends Component {
         super({element});
         this._phones = phones;
         this._onPhoneSelected = onPhoneSelected;
-        this._render();
-        this._element.addEventListener('click', ev => {
+        this.render();
+        this.element.addEventListener('click', ev => {
             this._onPhoneClick(ev)
         });
     }
@@ -21,8 +21,8 @@ export default class PhoneCatalog extends Component {
         this._onPhoneSelected(phoneElement.dataset.phoneId)
     }
 
-    _render() {
-        this._element.innerHTML = `
+    render() {
+        this.element.innerHTML = `
         <ul class="phones">
             ${this._phones.map(phone => `
                 <li class="thumbnail"

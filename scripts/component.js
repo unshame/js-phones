@@ -1,15 +1,42 @@
-const CLASS_HIDDEN = 'js-hidden';
-
 export default class Component {
-    constructor({element}) {
-        this._element = element;
+    constructor({element, _hiddenClass = 'js-hidden'}) {
+        this.element = element;
+        this._hiddenClass = _hiddenClass;
+        this.subComponents = {};
+    }
+
+    addSubComponent(componentConstructor, name, tag = 'div', options = {}) {
+        options.element = this.createElement('div', name);
+        let component = new componentConstructor(options);
+        this.subComponents[name] = component;
+        return component;
+    }
+
+    embedSubComponents() {
+        for(let [name, component] of Object.entries(this.subComponents)) {
+            this.element.querySelector(`[data-component="${name}"]`).replaceWith(component.element);
+        }
+    }
+
+    render() {
+        throw new Error('Not implemented');
     }
 
     hide() {
-        this._element.classList.add(CLASS_HIDDEN);
+        this.element.classList.add(this._hiddenClass);
     }
 
     show() {
-        this._element.classList.remove(CLASS_HIDDEN);
+        this.element.classList.remove(this._hiddenClass);
+    }
+
+    createElement(tag, componentName) {
+        let element = document.createElement('div');
+
+        if(componentName) {
+            element.dataset.component = 'phone-catalog';
+        }
+
+        return element;
     }
 }

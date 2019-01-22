@@ -6,12 +6,12 @@ export default class PhoneViewer extends Component {
     }
 
     show(phone) {
-        this._render(phone);
+        this.render(phone);
         super.show();
     }
 
-    _render(phone) {
-        this._element.innerHTML = `
+    render(phone) {
+        this.element.innerHTML = `
             
             <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
       <button>Back</button>
