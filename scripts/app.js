@@ -1,3 +1,3 @@
-import PhonesPage from './components/PhonePage.js';
+import Page from './components/Page.js';
 
-window.phonesPage = new PhonesPage({element: document.querySelector('[data-page-container]')});
+window.page = new Page({element: document.querySelector('[data-page-container]')});

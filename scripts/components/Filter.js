@@ -2,7 +2,7 @@ import ComponentCollection from "../ComponentCollection.js";
 import SearchField from './SearchField.js';
 import SelectField from './SelectField.js';
 
-export default class PhoneFilter extends ComponentCollection {
+export default class Filter extends ComponentCollection {
 
     constructor({ element, orderAttributes, onChange }) {
         super({ element });

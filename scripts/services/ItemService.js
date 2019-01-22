@@ -1,13 +1,13 @@
 import phones from '../../phones/phones.js';
 
-const PhoneService = {
-    getPhones() {
+let ItemService = {
+    getItems() {
         return phones;
     },
 
-    getPhone(id) {
+    getItem(id) {
         return 'phone ' + id
     }
 };
 
-export default PhoneService;
+export default ItemService

@@ -1,26 +1,26 @@
 import Component from "../Component.js";
 
-export default class PhonePreview extends Component {
+export default class Preview extends Component {
 
-    constructor({element, phone, onPhoneSelected}) {
+    constructor({element, item, onItemSelected}) {
         super({element});
-        this.phone = phone;
+        this.item = item;
         this.element.addEventListener('click', (event) => {
             if(event.target.closest('a')) {
-                onPhoneSelected(this.phone.id);
+                onItemSelected(this.item.id);
             }
         });
     }
 
     generateHTML() {
-        let phone = this.phone;
+        let item = this.item;
         return `
             <li class="thumbnail"
                 data-element="phone"
-                data-phone-id="${phone.id}">
+                data-item-id="${item.id}">
                 
-                <a href="#!/phones/${phone.id}" class="thumb">
-                <img alt="${phone.name}" src="${phone.imageUrl}">
+                <a href="#!/phones/${item.id}" class="thumb">
+                <img alt="${item.name}" src="${item.imageUrl}">
                 </a>
                 
                 <div class="phones__btn-buy-wrapper">
@@ -29,9 +29,9 @@ export default class PhonePreview extends Component {
                     </a>
                 </div>
                 
-                <a href="#!/phones/${phone.id}">${phone.name}</a>
+                <a href="#!/phones/${item.id}">${item.name}</a>
                 
-                <p>${phone.snippet}</p>
+                <p>${item.snippet}</p>
             </li>`
     }
 }

@@ -1,13 +1,13 @@
 import Component from "../Component.js";
 
-export default class PhoneViewer extends Component {
-    constructor({element, phone = null}) {
+export default class Viewer extends Component {
+    constructor({element, item = null}) {
       super({element});
-      this.setPhone(phone);
+      this.setItem(item);
     }
 
-    setPhone(phone) {
-      this.phone = phone;
+    setItem(item) {
+      this.item = item;
     }
 
     generateHTML() {

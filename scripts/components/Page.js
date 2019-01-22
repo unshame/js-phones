@@ -1,32 +1,32 @@
-import PhoneCatalog from './PhoneCatalog.js';
-import PhoneViewer from './PhoneViewer.js';
-import PhoneService from "../services/PhoneService.js";
+import Catalog from './Catalog.js';
+import View from './Viewer.js';
+import ItemService from "../services/ItemService.js";
 import ComponentCollection from '../ComponentCollection.js';
-import PhoneFilter from './PhoneFilter.js';
+import Filter from './Filter.js';
 
-export default class PhonesPage extends ComponentCollection {
+export default class Page extends ComponentCollection {
     constructor({element}) {
         super({element});
         this.setAutoRenderOptions({ render: false });
 
         this._catalog = this.addSubComponent({
-            constructor: PhoneCatalog,
-            name: 'phone-catalog',
+            constructor: Catalog,
+            name: 'catalog',
             options: {
-                phones: PhoneService.getPhones(),
-                onPhoneSelected: id => this.showPhone(id),
-                onPhoneUnselected: () => this.hidePhone()
+                items: ItemService.getItems(),
+                onItemSelected: id => this.showItem(id),
+                onItemUnselected: () => this.hideItem()
             }
         });
 
         this._viewer = this.addSubComponent({
-            constructor: PhoneViewer,
-            name: 'phone-viewer'
+            constructor: View,
+            name: 'viewer'
         });
 
         this._filter = this.addSubComponent({
-            constructor: PhoneFilter,
-            name: 'phone-filter',
+            constructor: Filter,
+            name: 'filter',
             tag: 'section',
             options: {
                 orderAttributes: [
@@ -44,15 +44,15 @@ export default class PhonesPage extends ComponentCollection {
         this.render();
     }
 
-    showPhone(id) {
+    showItem(id) {
         this._catalog.hide();
-        this._viewer.setPhone(PhoneService.getPhone(id))
+        this._viewer.setItem(ItemService.getItem(id))
         this._viewer.show();
         this._viewer.render();
         this._activeSubComponent = this._viewer;
     }
 
-    hidePhone() {
+    hideItem() {
         this._viewer.hide();
         this._catalog.show();
         this._catalog.render();
@@ -71,7 +71,7 @@ export default class PhonesPage extends ComponentCollection {
         <div class="row">
             <!--Sidebar-->
             <div class="col-md-2">
-                <section data-component="phone-filter"></section>
+                <section data-component="filter"></section>
         
                 <section>
                     <p>Shopping Cart</p>
@@ -85,8 +85,8 @@ export default class PhonesPage extends ComponentCollection {
         
             <!--Main content-->
             <div class="col-md-10">
-                <div data-component="phone-catalog"></div>
-                <div data-component="phone-viewer"></div>
+                <div data-component="catalog"></div>
+                <div data-component="viewer"></div>
             </div>
         </div>`;
     }
