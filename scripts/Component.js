@@ -36,11 +36,10 @@ export default class Component {
     }
 
     destroy(alwaysRemove) {
+        this.element.innerHTML = '';
+
         if (alwaysRemove || this._ownsElement) {
             this.element.remove();
-        }
-        else {
-            this.element.innerHTML = '';
         }
     }
 
