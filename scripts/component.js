@@ -2,20 +2,6 @@ export default class Component {
     constructor({element, _hiddenClass = 'js-hidden'}) {
         this.element = element;
         this._hiddenClass = _hiddenClass;
-        this.subComponents = {};
-    }
-
-    addSubComponent(componentConstructor, name, tag = 'div', options = {}) {
-        options.element = this.createElement('div', name);
-        let component = new componentConstructor(options);
-        this.subComponents[name] = component;
-        return component;
-    }
-
-    embedSubComponents() {
-        for(let [name, component] of Object.entries(this.subComponents)) {
-            this.element.querySelector(`[data-component="${name}"]`).replaceWith(component.element);
-        }
     }
 
     render() {

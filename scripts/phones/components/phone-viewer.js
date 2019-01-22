@@ -1,16 +1,16 @@
 import Component from "../../component.js";
 
 export default class PhoneViewer extends Component {
-    constructor({element}) {
+    constructor({element, phone = null}) {
         super({element});
+        this.phone = phone;
     }
 
-    show(phone) {
-        this.render(phone);
-        super.show();
+    setPhone(phone) {
+      this.phone = phone;
     }
 
-    render(phone) {
+    render() {
         this.element.innerHTML = `
             
             <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">

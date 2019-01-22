@@ -1,22 +1,34 @@
 import PhoneCatalog from './phone-catalog.js';
 import PhoneViewer from './phone-viewer.js';
 import PhoneService from "../services/phone-service.js";
-import Component from '../../component.js';
+import ComponentCollection from '../../component-collection.js';
 
-export default class PhonesPage extends Component {
+export default class PhonesPage extends ComponentCollection {
     constructor({element}) {
         super({element});
         this._catalog = this.addSubComponent(PhoneCatalog, 'phone-catalog', 'div', {
             phones: PhoneService.getPhones(),
-            onPhoneSelected: id => {
-                this._catalog.hide();
-
-                const phone = PhoneService.getPhone(id);
-                this._viewer.show(phone);
-            }
+            onPhoneSelected: id => this.showPhone(id),
+            onPhoneUnselected: () => this.hidePhone()
         });
         this._viewer = this.addSubComponent(PhoneViewer, 'phone-viewer', 'div');
+        this.activeSubComponent = this._catalog;
         this.render();
+    }
+
+    showPhone(id) {
+        this._catalog.hide();
+        this._viewer.setPhone(PhoneService.getPhone(id))
+        this._viewer.show();
+        this._viewer.render();
+        this.activeSubComponent = this._viewer;
+    }
+
+    hidePhone() {
+        this._viewer.hide();
+        this._catalog.show();
+        this._catalog.render();
+        this.activeSubComponent = this._catalog;
     }
 
     render() {
@@ -57,5 +69,6 @@ export default class PhonesPage extends Component {
         </div>`;
 
         this.embedSubComponents();
+        this.activeSubComponent.render();
     }
 }
