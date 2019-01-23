@@ -1,8 +1,9 @@
+import ComponentMap from '../ComponentMap.js';
 import Catalog from './Catalog.js';
 import View from './View.js';
 import Filter from './Filter.js';
+import Minicart from './Minicart.js';
 import defaultTemplate from '../templates/page.js';
-import ComponentMap from '../ComponentMap.js';
 
 export default class Page extends ComponentMap {
     constructor({ 
@@ -22,7 +23,11 @@ export default class Page extends ComponentMap {
             options: {
                 childrenData: catalogData,
                 onItemSelected: id => this.showItem(id),
-                onItemUnselected: () => this.hideItem()
+                onItemUnselected: () => this.hideItem(),
+                onAddToCart: name => {
+                    this._minicart.addItem(name);
+                    this._minicart.render();
+                }
             }
         });
 
@@ -30,6 +35,12 @@ export default class Page extends ComponentMap {
             constructor: View,
             name: 'viewer'
         });
+
+        this._minicart = this.addChild({
+            constructor: Minicart,
+            name: 'minicart',
+            tag: 'section'
+        })
 
         this._filter = this.addChild({
             constructor: Filter,
@@ -47,6 +58,7 @@ export default class Page extends ComponentMap {
         this._activeSubComponent = this._catalog;
         super.render();
         this._filter.render();
+        this._minicart.render();
         this._catalog.setFilter(this._filter.getValues());
         this._catalog.render();
     }
@@ -69,6 +81,7 @@ export default class Page extends ComponentMap {
     render() {
         super.render();
         this._filter.render();
+        this._minicart.render();
         this._activeSubComponent.render();
     }
 
