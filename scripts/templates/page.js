@@ -13,7 +13,7 @@ export default function template(data) {
             <!--Main content-->
             <div class="col-md-10">
                 <div ${data.catalog}></div>
-                <div ${data.viewer}></div>
+                <div ${data.view}></div>
             </div>
         </div>`
 }

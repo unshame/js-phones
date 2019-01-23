@@ -1,4 +1,5 @@
 import Component from "./Component.js";
+import newComponent from './new-component.js';
 
 export default class ComponentCollection extends Component {
 
@@ -21,14 +22,13 @@ export default class ComponentCollection extends Component {
         options = {}
     }) {
         options.element = { tag, name, id };
-        let component = new constructor(options);
+        let component = new newComponent(name, options);
         let dataId = id ? `data-component-id="${id}"` : '';
         let componentInfo = { 
             component, name, id, 
             selector: `[data-component="${name}"]${dataId ? '[' + dataId + ']' : ''}`, 
             dataAttributes: `data-component="${name}"${dataId ? ' ' + dataId : ''}`
         };
-        Object.freeze(componentInfo);
         this.children.push(componentInfo);
         this.childrenById[id || name] = componentInfo;
         return component;
@@ -64,14 +64,19 @@ export default class ComponentCollection extends Component {
     }
 
     _embedChildren() {
-        for (let { component, selector } of this.children) {
-            
+        for (let child of this.children) {
+            let { component, selector, hasBeenEmbedded } = child;
             let node = this.element.querySelector(selector);
 
             if(node) {
+                
+                if (!hasBeenEmbedded) {
+                    
+                    for (let attribute of node.attributes) {
+                        component.element.setAttribute(attribute.name, attribute.value);
+                    }
 
-                for (let attribute of node.attributes) {
-                    component.element.setAttribute(attribute.name, attribute.value);
+                    child.hasBeenEmbedded = true;
                 }
 
                 node.replaceWith(component.element);

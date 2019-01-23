@@ -1,18 +1,20 @@
-import Page from './components/Page.js';
 import fetchJSON from './fetcher.js';
+import newComponent, { loadComponents } from './new-component.js';
 
-
-fetchJSON('./phones/phones.json', (items) => {
-    window.page = new Page({
+Promise.all([
+    fetchJSON('./phones/phones.json'),
+    loadComponents()
+]).then(([items]) => {
+    window.page = newComponent('page', {
         element: document.querySelector('[data-page-container]'),
         childrenData: {
-            catalogData: items, 
+            catalogData: items,
             filterData: {
                 attributes: [
                     { value: 'name', name: 'Alphabetical' },
                     { value: 'age', name: 'Newest' }
                 ]
             }
-        } 
+        }
     });
 })

@@ -1,6 +1,4 @@
 import ComponentMap from "../ComponentMap.js";
-import SearchField from './SearchField.js';
-import SelectField from './SelectField.js';
 import defaultTemplate from '../templates/filter.js'
 
 export default class Filter extends ComponentMap {
@@ -9,7 +7,6 @@ export default class Filter extends ComponentMap {
         super({ element, template });
 
         this._searchField = this.addChild({
-            constructor: SearchField,
             name: 'search-field',
             options: {
                 onChange: () => onChange(this.getValues())
@@ -17,7 +14,6 @@ export default class Filter extends ComponentMap {
         });
 
         this._selectField = this.addChild({
-            constructor: SelectField,
             name: 'select-field',
             options: {
                 data: attributes,

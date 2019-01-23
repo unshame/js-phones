@@ -1,5 +1,4 @@
 import ComponentArray from '../ComponentArray.js';
-import Preview from './Preview.js';
 import defaultTemplate from '../templates/catalog.js';
 
 export default class Catalog extends ComponentArray {
@@ -9,7 +8,6 @@ export default class Catalog extends ComponentArray {
 
         for (let datum of childrenData) {
             this.addChild({
-                constructor: Preview,
                 name: 'preview',
                 id: datum.id,
                 options: { data: datum, onItemSelected, onAddToCart }

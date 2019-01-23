@@ -1,9 +1,10 @@
 let timestamp = null;
 
 function fetchJSON(url, callback) {
-    fetch(url)
-        .then(response => response.json())
-        .then(obj => callback(obj));
+    return fetch(url)
+        .then(response => {
+            return response.json()
+        });
 }
 
 function abortAndFetchJSON(url, callback) {
