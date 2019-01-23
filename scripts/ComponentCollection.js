@@ -69,6 +69,11 @@ export default class ComponentCollection extends Component {
             let node = this.element.querySelector(selector);
 
             if(node) {
+
+                for (let attribute of node.attributes) {
+                    component.element.setAttribute(attribute.name, attribute.value);
+                }
+
                 node.replaceWith(component.element);
             }
         }
