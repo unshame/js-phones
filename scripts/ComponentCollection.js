@@ -2,17 +2,17 @@ import Component from "./Component.js";
 
 export default class ComponentCollection extends Component {
 
-    constructor({element}) {
-        super({element});
-        this.subComponents = [];
-        this.subComponentsById = {};
-        this._autoEmbedSubComponents = true;
-        this._autoRenderSubComponents = true;
+    constructor({ element, template }) {
+        super({ element, template });
+        this.children = [];
+        this.childrenById = {};
+        this._autoEmbedChildren = true;
+        this._autoRenderChildren = true;
     }
 
     setAutoRenderOptions({ embed = true, render = true }) {
-        this._autoEmbedSubComponents = embed;
-        this._autoRenderSubComponents = render;
+        this._autoEmbedChildren = embed;
+        this._autoRenderChildren = render;
     }
 
     addSubComponent({
@@ -22,13 +22,13 @@ export default class ComponentCollection extends Component {
     }) {
         options.element = { tag, name, id };
         let component = new constructor(options);
-        this.subComponents.push({component, name, id});
-        this.subComponentsById[id || name] = component;
+        this.children.push({component, name, id});
+        this.childrenById[id || name] = component;
         return component;
     }
 
-    _embedSubComponents() {
-        for (let { component, name, id } of this.subComponents) {
+    _embedChildren() {
+        for (let { component, name, id } of this.children) {
             let dataId = id ? `[data-component-id="${id}"]` : '';
             let node = this.element.querySelector(`[data-component="${name}"]${dataId}`);
 
@@ -38,8 +38,8 @@ export default class ComponentCollection extends Component {
         }
     }
 
-    _renderSubComponents() {
-        for (let { component } of this.subComponents) {
+    _renderChildren() {
+        for (let { component } of this.children) {
             component.render();
         }
     }
@@ -47,18 +47,18 @@ export default class ComponentCollection extends Component {
     render() {
         super.render();
 
-        if (this._autoEmbedSubComponents) {
-            this._embedSubComponents();
+        if (this._autoEmbedChildren) {
+            this._embedChildren();
         }
 
-        if (this._autoRenderSubComponents) {
-            this._renderSubComponents();
+        if (this._autoRenderChildren) {
+            this._renderChildren();
         }
     }
 
     destroy(alwaysRemove, alwaysRemoveSub) {
 
-        for (let { component } of this.subComponents) {
+        for (let { component } of this.children) {
             component.destroy(alwaysRemoveSub);
         }
 

@@ -1,39 +1,34 @@
 import ComponentCollection from '../ComponentCollection.js';
 import Preview from './Preview.js';
+import defaultTemplate from '../templates/catalog.js';
 
 export default class Catalog extends ComponentCollection {
 
-    constructor({element, items, onItemSelected}) {
-        super({element});
-        for(let item of items) {
+    constructor({ element, data, template = defaultTemplate, onItemSelected }) {
+        super({ element, template });
+
+        for(let datum of data) {
             this.addSubComponent({
                 constructor: Preview,
                 name: 'preview',
-                id: item.id,
-                options: { item, onItemSelected }
+                id: datum.id,
+                options: { data: datum, onItemSelected }
             });
         }
 
-        this._subComponentsFiltered = [...this.subComponents];
-    }
-
-    generateHTML() {
-        let itemDivs = this._subComponentsFiltered.map(({ name, id }) => `<div data-component="${name}" data-component-id=${id}></div>`)
-        return `
-            <ul class="phones">
-                ${itemDivs.join('')}
-            </ul>`;
+        this.setData(...this.children);
     }
 
     filter({ query, order }) {
+        let data;
         if (!query) {
-            this._subComponentsFiltered = [...this.subComponents];
+            data = [...this.children];
         }
         else {
-            this._subComponentsFiltered = this.subComponents.filter(({ component }) => {
+            data = this.children.filter(({ component }) => {
                 
                 for (let word of query.toLowerCase().split(/\s/)) {
-                    if (!component.item.name.toLowerCase().includes(word)) {
+                    if (!component.getData().name.toLowerCase().includes(word)) {
                         return false;
                     }
                 }
@@ -42,13 +37,15 @@ export default class Catalog extends ComponentCollection {
             });
         }
 
-        this._subComponentsFiltered.sort(({ component: ca }, { component: cb }) => {
-            let a = String(ca.item[order]).toLowerCase();
-            let b = String(cb.item[order]).toLowerCase();
+        data.sort(({ component: ca }, { component: cb }) => {
+            let a = String(ca.getData()[order]).toLowerCase();
+            let b = String(cb.getData()[order]).toLowerCase();
 
             if(a > b) return 1;
             if(a < b) return -1;
             return 0;
         });
+
+        this.setData(data);
     }
 }

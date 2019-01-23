@@ -1,15 +1,14 @@
 import Component from "../Component.js";
 
+function defaultTemplate(data) {
+    return data.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');
+}
+
 export default class SelectField extends Component {
 
-    constructor({ element, orderAttributes, onChange }) {
-        super({ element });
-        this._orderAttributes = orderAttributes;
+    constructor({ element, data, template = defaultTemplate, onChange }) {
+        super({ element, data, template });
         this.element.addEventListener('change', (event) => onChange(this.element.value, event));
-    }
-
-    generateHTML() {
-        return this._orderAttributes.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');
     }
 
     get defaultTag() {

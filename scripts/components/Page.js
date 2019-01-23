@@ -1,19 +1,26 @@
 import Catalog from './Catalog.js';
 import View from './View.js';
-import ItemService from "../services/ItemService.js";
 import ComponentCollection from '../ComponentCollection.js';
 import Filter from './Filter.js';
+import defaultTemplate from '../templates/page.js';
 
 export default class Page extends ComponentCollection {
-    constructor({element}) {
-        super({element});
+    constructor({ 
+        element, 
+        data: { 
+            items = [],
+            filterData = []
+        }, 
+        template = defaultTemplate
+    }) {
+        super({ element, template });
         this.setAutoRenderOptions({ render: false });
 
         this._catalog = this.addSubComponent({
             constructor: Catalog,
             name: 'catalog',
             options: {
-                items: ItemService.getItems(),
+                data: items,
                 onItemSelected: id => this.showItem(id),
                 onItemUnselected: () => this.hideItem()
             }
@@ -29,10 +36,7 @@ export default class Page extends ComponentCollection {
             name: 'filter',
             tag: 'section',
             options: {
-                orderAttributes: [
-                    { value: 'name', name: 'Alphabetical'},
-                    { value: 'age', name: 'Newest' }
-                ],
+                data: filterData,
                 onChange: (values) => {
                     this._catalog.filter(values);
                     this._catalog.render();
@@ -64,30 +68,5 @@ export default class Page extends ComponentCollection {
         this._filter.render();
         this._catalog.filter(this._filter.getValues());
         this._activeSubComponent.render();
-    }
-
-    generateHTML() {
-        return `
-        <div class="row">
-            <!--Sidebar-->
-            <div class="col-md-2">
-                <section data-component="filter"></section>
-        
-                <section>
-                    <p>Shopping Cart</p>
-                    <ul>
-                        <li>Phone 1</li>
-                        <li>Phone 2</li>
-                        <li>Phone 3</li>
-                    </ul>
-                </section>
-            </div>
-        
-            <!--Main content-->
-            <div class="col-md-10">
-                <div data-component="catalog"></div>
-                <div data-component="viewer"></div>
-            </div>
-        </div>`;
     }
 }

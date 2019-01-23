@@ -4,7 +4,7 @@ import SelectField from './SelectField.js';
 
 export default class Filter extends ComponentCollection {
 
-    constructor({ element, orderAttributes, onChange }) {
+    constructor({ element, data: { attributes }, onChange }) {
         super({ element });
 
         this._searchField = this.addSubComponent({
@@ -19,7 +19,7 @@ export default class Filter extends ComponentCollection {
             constructor: SelectField,
             name: 'select-field',
             options: {
-                orderAttributes,
+                data: attributes,
                 onChange: () => onChange(this.getValues())
             }
         })

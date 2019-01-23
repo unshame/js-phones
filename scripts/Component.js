@@ -1,7 +1,14 @@
 export default class Component {
-    constructor({ element, hiddenClass = 'js-hidden' }) {
+    constructor({ 
+        element,
+        data = {},
+        template = () => '',
+        hiddenClass = 'js-hidden'
+    }) {
         this._ownsElement = !(element instanceof Element);
         this.element = this._ownsElement ? this._createElement(element) : element;
+        this._data = data;
+        this._template = template;
         this._hiddenClass = hiddenClass;
     }
 
@@ -24,7 +31,7 @@ export default class Component {
     }
 
     generateHTML() {
-        return '';
+        return this._template(this._data);
     }
 
     hide() {
@@ -41,6 +48,14 @@ export default class Component {
         if (alwaysRemove || this._ownsElement) {
             this.element.remove();
         }
+    }
+
+    setData(data) {
+        this._data = data;
+    }
+
+    getData() {
+        return this._data;
     }
 
     get defaultTag() {
