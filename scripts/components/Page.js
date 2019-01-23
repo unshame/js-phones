@@ -1,10 +1,10 @@
 import Catalog from './Catalog.js';
 import View from './View.js';
-import ComponentCollection from '../ComponentCollection.js';
 import Filter from './Filter.js';
 import defaultTemplate from '../templates/page.js';
+import ComponentMap from '../ComponentMap.js';
 
-export default class Page extends ComponentCollection {
+export default class Page extends ComponentMap {
     constructor({ 
         element,
         data,
@@ -73,11 +73,8 @@ export default class Page extends ComponentCollection {
         this._activeSubComponent.render();
     }
 
-    get data() {
-        return this.children.reduce((obj, child) => {
-            obj[child.id || child.name] = child.dataAttributes;
-            return obj;
-        }, {});
+    mapChild(child) {
+        return child.dataAttributes;
     }
 
 }

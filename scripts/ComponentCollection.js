@@ -23,9 +23,11 @@ export default class ComponentCollection extends Component {
         options.element = { tag, name, id };
         let component = new constructor(options);
         let dataId = id ? `data-component-id="${id}"` : '';
-        let selector = `[data-component="${name}"]${ dataId ? '[' + dataId + ']' : '' }`;
-        let dataAttributes = `data-component="${name}" ${dataId}`;
-        let componentInfo = { component, name, id, selector, dataAttributes };
+        let componentInfo = { 
+            component, name, id, 
+            selector: `[data-component="${name}"]${dataId ? '[' + dataId + ']' : ''}`, 
+            dataAttributes: `data-component="${name}"${dataId ? ' ' + dataId : ''}`
+        };
         Object.freeze(componentInfo);
         this.children.push(componentInfo);
         this.childrenById[id || name] = componentInfo;
@@ -33,7 +35,7 @@ export default class ComponentCollection extends Component {
     }
 
     _embedChildren() {
-        for (let { component, name, id, selector } of this.children) {
+        for (let { component, selector } of this.children) {
             
             let node = this.element.querySelector(selector);
 

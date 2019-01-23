@@ -1,8 +1,8 @@
-import ComponentCollection from '../ComponentCollection.js';
+import ComponentArray from '../ComponentArray.js';
 import Preview from './Preview.js';
 import defaultTemplate from '../templates/catalog.js';
 
-export default class Catalog extends ComponentCollection {
+export default class Catalog extends ComponentArray {
 
     constructor({ element, data, childrenData = [], template = defaultTemplate, onItemSelected }) {
         super({ element, data, template });
@@ -23,14 +23,13 @@ export default class Catalog extends ComponentCollection {
         this._filters = { ...this._filters, ...filters };
     }
 
-    get data() {
-        let data;
+    filterChildren(children) {
         let { query, order } = this._filters;
         if (!query) {
-            data = [...this.children];
+            children = [...this.children];
         }
         else {
-            data = this.children.filter(({ component }) => {
+            children = this.children.filter(({ component }) => {
 
                 for (let word of query.toLowerCase().split(/\s/)) {
                     if (!component.data.name.toLowerCase().includes(word)) {
@@ -42,7 +41,7 @@ export default class Catalog extends ComponentCollection {
             });
         }
 
-        data.sort(({ component: ca }, { component: cb }) => {
+        children.sort(({ component: ca }, { component: cb }) => {
             let a = String(ca.data[order]).toLowerCase();
             let b = String(cb.data[order]).toLowerCase();
 
@@ -51,6 +50,6 @@ export default class Catalog extends ComponentCollection {
             return 0;
         });
 
-        return data;
+        return children;
     }
 }
