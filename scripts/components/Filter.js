@@ -4,8 +4,8 @@ import SelectField from './SelectField.js';
 
 export default class Filter extends ComponentCollection {
 
-    constructor({ element, data: { attributes }, onChange }) {
-        super({ element });
+    constructor({ element, data, childrenData: { attributes }, onChange }) {
+        super({ element, data });
 
         this._searchField = this.addSubComponent({
             constructor: SearchField,

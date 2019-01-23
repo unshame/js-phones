@@ -6,21 +6,22 @@ import defaultTemplate from '../templates/page.js';
 
 export default class Page extends ComponentCollection {
     constructor({ 
-        element, 
-        data: { 
-            items = [],
+        element,
+        data,
+        childrenData: { 
+            catalogData = [],
             filterData = []
         }, 
         template = defaultTemplate
     }) {
-        super({ element, template });
+        super({ element, data, template });
         this.setAutoRenderOptions({ render: false });
 
         this._catalog = this.addSubComponent({
             constructor: Catalog,
             name: 'catalog',
             options: {
-                data: items,
+                childrenData: catalogData,
                 onItemSelected: id => this.showItem(id),
                 onItemUnselected: () => this.hideItem()
             }
@@ -36,7 +37,7 @@ export default class Page extends ComponentCollection {
             name: 'filter',
             tag: 'section',
             options: {
-                data: filterData,
+                childrenData: filterData,
                 onChange: (values) => {
                     this._catalog.filter(values);
                     this._catalog.render();
