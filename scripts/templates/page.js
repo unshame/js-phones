@@ -1,9 +1,9 @@
-export default function template() {
+export default function template(data) {
     return `
         <div class="row">
             <!--Sidebar-->
             <div class="col-md-2">
-                <section data-component="filter"></section>
+                <div ${data.filter}></div>
         
                 <section>
                     <p>Shopping Cart</p>
@@ -17,8 +17,8 @@ export default function template() {
         
             <!--Main content-->
             <div class="col-md-10">
-                <div data-component="catalog"></div>
-                <div data-component="viewer"></div>
+                <div ${data.catalog}></div>
+                <div ${data.viewer}></div>
             </div>
         </div>`
 }

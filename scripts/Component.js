@@ -31,7 +31,7 @@ export default class Component {
     }
 
     generateHTML() {
-        return this._template(this._data);
+        return this._template(this.data);
     }
 
     hide() {
@@ -50,11 +50,11 @@ export default class Component {
         }
     }
 
-    setData(data) {
+    set data(data) {
         this._data = data;
     }
 
-    getData() {
+    get data() {
         return this._data;
     }
 

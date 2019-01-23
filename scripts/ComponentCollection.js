@@ -2,8 +2,8 @@ import Component from "./Component.js";
 
 export default class ComponentCollection extends Component {
 
-    constructor({ element, template }) {
-        super({ element, template });
+    constructor({ element, data, template }) {
+        super({ element, data, template });
         this.children = [];
         this.childrenById = {};
         this._autoEmbedChildren = true;
@@ -22,15 +22,20 @@ export default class ComponentCollection extends Component {
     }) {
         options.element = { tag, name, id };
         let component = new constructor(options);
-        this.children.push({component, name, id});
-        this.childrenById[id || name] = component;
+        let dataId = id ? `data-component-id="${id}"` : '';
+        let selector = `[data-component="${name}"]${ dataId ? '[' + dataId + ']' : '' }`;
+        let dataAttributes = `data-component="${name}" ${dataId}`;
+        let componentInfo = { component, name, id, selector, dataAttributes };
+        Object.freeze(componentInfo);
+        this.children.push(componentInfo);
+        this.childrenById[id || name] = componentInfo;
         return component;
     }
 
     _embedChildren() {
-        for (let { component, name, id } of this.children) {
-            let dataId = id ? `[data-component-id="${id}"]` : '';
-            let node = this.element.querySelector(`[data-component="${name}"]${dataId}`);
+        for (let { component, name, id, selector } of this.children) {
+            
+            let node = this.element.querySelector(selector);
 
             if(node) {
                 node.replaceWith(component.element);

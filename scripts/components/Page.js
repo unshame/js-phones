@@ -39,14 +39,17 @@ export default class Page extends ComponentCollection {
             options: {
                 childrenData: filterData,
                 onChange: (values) => {
-                    this._catalog.filter(values);
+                    this._catalog.setFilter(values);
                     this._catalog.render();
                 }
             }
         });
 
         this._activeSubComponent = this._catalog;
-        this.render();
+        super.render();
+        this._filter.render();
+        this._catalog.setFilter(this._filter.getValues());
+        this._catalog.render();
     }
 
     showItem(id) {
@@ -67,7 +70,14 @@ export default class Page extends ComponentCollection {
     render() {
         super.render();
         this._filter.render();
-        this._catalog.filter(this._filter.getValues());
         this._activeSubComponent.render();
     }
+
+    get data() {
+        return this.children.reduce((obj, child) => {
+            obj[child.id || child.name] = child.dataAttributes;
+            return obj;
+        }, {});
+    }
+
 }

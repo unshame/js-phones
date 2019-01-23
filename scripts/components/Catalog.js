@@ -16,19 +16,24 @@ export default class Catalog extends ComponentCollection {
             });
         }
 
-        this.setData(...this.children);
+        this._filters = {};
     }
 
-    filter({ query, order }) {
+    setFilter(filters) {
+        this._filters = { ...this._filters, ...filters };
+    }
+
+    get data() {
         let data;
+        let { query, order } = this._filters;
         if (!query) {
             data = [...this.children];
         }
         else {
             data = this.children.filter(({ component }) => {
-                
+
                 for (let word of query.toLowerCase().split(/\s/)) {
-                    if (!component.getData().name.toLowerCase().includes(word)) {
+                    if (!component.data.name.toLowerCase().includes(word)) {
                         return false;
                     }
                 }
@@ -38,14 +43,14 @@ export default class Catalog extends ComponentCollection {
         }
 
         data.sort(({ component: ca }, { component: cb }) => {
-            let a = String(ca.getData()[order]).toLowerCase();
-            let b = String(cb.getData()[order]).toLowerCase();
+            let a = String(ca.data[order]).toLowerCase();
+            let b = String(cb.data[order]).toLowerCase();
 
-            if(a > b) return 1;
-            if(a < b) return -1;
+            if (a > b) return 1;
+            if (a < b) return -1;
             return 0;
         });
 
-        this.setData(data);
+        return data;
     }
 }

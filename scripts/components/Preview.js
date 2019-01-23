@@ -7,7 +7,7 @@ export default class Preview extends Component {
         super({ element, template, data });
         this.element.addEventListener('click', (event) => {
             if(event.target.closest('a')) {
-                onItemSelected(this.getData().id);
+                onItemSelected(this.data.id);
             }
         });
     }
