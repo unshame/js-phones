@@ -1,13 +1,14 @@
-import ComponentCollection from "../ComponentCollection.js";
+import ComponentMap from "../ComponentMap.js";
 import SearchField from './SearchField.js';
 import SelectField from './SelectField.js';
+import defaultTemplate from '../templates/filter.js'
 
-export default class Filter extends ComponentCollection {
+export default class Filter extends ComponentMap {
 
-    constructor({ element, data, childrenData: { attributes }, onChange }) {
-        super({ element, data });
+    constructor({ element, childrenData: { attributes }, template = defaultTemplate, onChange }) {
+        super({ element, template });
 
-        this._searchField = this.addSubComponent({
+        this._searchField = this.addChild({
             constructor: SearchField,
             name: 'search-field',
             options: {
@@ -15,7 +16,7 @@ export default class Filter extends ComponentCollection {
             }
         });
 
-        this._selectField = this.addSubComponent({
+        this._selectField = this.addChild({
             constructor: SelectField,
             name: 'select-field',
             options: {
@@ -32,20 +33,8 @@ export default class Filter extends ComponentCollection {
         };
     }
 
-    generateHTML() {
-        return `
-            <p>
-                Search:
-                <input data-component="search-field">
-            </p>
-
-            <p>
-                Sort by:
-                <select data-component="select-field">
-                    <option value="name">Alphabetical</option>
-                    <option value="age">Newest</option>
-                </select>
-            </p>`;
+    mapChild(child) {
+        return child.dataAttributes;
     }
 
 }

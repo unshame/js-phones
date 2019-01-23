@@ -4,11 +4,11 @@ import defaultTemplate from '../templates/catalog.js';
 
 export default class Catalog extends ComponentArray {
 
-    constructor({ element, data, childrenData = [], template = defaultTemplate, onItemSelected }) {
-        super({ element, data, template });
+    constructor({ element, childrenData = [], template = defaultTemplate, onItemSelected }) {
+        super({ element, template });
 
         for (let datum of childrenData) {
-            this.addSubComponent({
+            this.addChild({
                 constructor: Preview,
                 name: 'preview',
                 id: datum.id,

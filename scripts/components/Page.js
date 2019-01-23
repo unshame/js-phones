@@ -7,17 +7,16 @@ import ComponentMap from '../ComponentMap.js';
 export default class Page extends ComponentMap {
     constructor({ 
         element,
-        data,
         childrenData: { 
             catalogData = [],
             filterData = []
         }, 
         template = defaultTemplate
     }) {
-        super({ element, data, template });
+        super({ element, template });
         this.setAutoRenderOptions({ render: false });
 
-        this._catalog = this.addSubComponent({
+        this._catalog = this.addChild({
             constructor: Catalog,
             name: 'catalog',
             options: {
@@ -27,12 +26,12 @@ export default class Page extends ComponentMap {
             }
         });
 
-        this._viewer = this.addSubComponent({
+        this._viewer = this.addChild({
             constructor: View,
             name: 'viewer'
         });
 
-        this._filter = this.addSubComponent({
+        this._filter = this.addChild({
             constructor: Filter,
             name: 'filter',
             tag: 'section',

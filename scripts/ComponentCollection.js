@@ -15,7 +15,7 @@ export default class ComponentCollection extends Component {
         this._autoRenderChildren = render;
     }
 
-    addSubComponent({
+    addChild({
         constructor,
         name, id, tag,
         options = {}
@@ -32,6 +32,35 @@ export default class ComponentCollection extends Component {
         this.children.push(componentInfo);
         this.childrenById[id || name] = componentInfo;
         return component;
+    }
+
+    removeChild(child, destroy, alwaysRemove) {
+        let index, id;
+
+        if(child instanceof Component) {
+            index = this.children.findIndex(otherChild => otherChild.component == child);
+            child = this.children[index];
+        }
+        else if(typeof child == 'object') {
+            index = this.children.indexOf(child);
+        }
+        else if (typeof child == 'number') {
+            index = child;
+            child = this.children[index];
+        }
+        else {
+            id = child;
+            child = this.childrenById[id];
+            index = this.children.indexOf(child);
+        }
+
+        id = id || child.id || child.name;
+        this.children.splice(index, 1);
+        delete this.childrenById[id];
+
+        if (destroy) {
+            child.component.destroy(alwaysRemove);
+        }
     }
 
     _embedChildren() {
