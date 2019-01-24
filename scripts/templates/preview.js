@@ -1,21 +1,17 @@
 export default function(data) {
-    return `
-        <li class="thumbnail"
-            data-element="phone"
-            data-item-id="${data.id}">
-            
-            <a href="#!/phones/${data.id}" class="thumb">
-            <img alt="${data.name}" src="${data.imageUrl}">
+    let url = `${data.urlBase}${data.id}`;
+    return `        
+        <a href="#!${url}" data-url="${url}" class="thumb" data-action="pick">
+        <img alt="${data.name}" src="${data.imageUrl}">
+        </a>
+        
+        <div class="phones__btn-buy-wrapper">
+            <a class="btn btn-success" data-action="add-to-cart">
+                Add
             </a>
-            
-            <div class="phones__btn-buy-wrapper">
-                <a class="btn btn-success">
-                    Add
-                </a>
-            </div>
-            
-            <a href="#!/phones/${data.id}">${data.name}</a>
-            
-            <p>${data.snippet}</p>
-        </li>`
+        </div>
+        
+        <a href="#!${url}" data-url="${url}" data-action="pick">${data.name}</a>
+        
+        <p>${data.snippet}</p>`
 }

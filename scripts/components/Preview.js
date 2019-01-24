@@ -1,17 +1,19 @@
-import Component from "../Component.js";
 import defaultTemplate from '../templates/preview.js';
+import ElementPicker from "./ElementPicker.js";
 
-export default class Preview extends Component {
+export default class Preview extends ElementPicker {
 
-    constructor({ element, data, template = defaultTemplate, onItemSelected, onAddToCart }) {
-        super({ element, template, data });
+    constructor({ element, data, template = defaultTemplate, onElementPicked, onAddToCart }) {
+        super({ element, template, data, onElementPicked });
         this.element.addEventListener('click', (event) => {
-            if (event.target.closest('.btn')) {
+            if (event.target.closest('[data-action="add-to-cart"]')) {
                 onAddToCart(this.data.name);
-            }
-            if (event.target.closest('a[href]')) {
-                onItemSelected(this.data.id);
+                event.preventDefault();
             }
         });
+    }
+
+    get defaultTag() {
+        return 'li';
     }
 }

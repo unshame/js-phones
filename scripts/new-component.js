@@ -6,10 +6,11 @@ const components = {
     'preview': './components/Preview.js',
     'search-field': './components/SearchField.js',
     'select-field': './components/SelectField.js',
-    'view': './components/View.js'
+    'fullview': './components/Fullview.js',
+    'element-picker': './components/ElementPicker.js'
 };
 
-export async function loadComponents() {
+async function loadComponents() {
     for(let [name, path] of Object.entries(components)) {
         if (typeof path == 'string') {
             components[name] = (await import(path)).default;
@@ -19,4 +20,8 @@ export async function loadComponents() {
 
 export default function newComponent(name, options) {
     return new components[name](options);
+}
+
+export {
+    newComponent, loadComponents
 }

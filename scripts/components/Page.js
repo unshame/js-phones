@@ -1,5 +1,6 @@
 import ComponentMap from '../ComponentMap.js';
 import defaultTemplate from '../templates/page.js';
+import { abortAndFetchJSON } from '../fetcher.js';
 
 export default class Page extends ComponentMap {
     constructor({ 
@@ -11,23 +12,29 @@ export default class Page extends ComponentMap {
         template = defaultTemplate
     }) {
         super({ element, template });
+
         this.setAutoRenderOptions({ render: false });
+        
+        let onAddToCart = (name) => {
+            this._minicart.addItem(name);
+            this._minicart.render();
+        }
 
         this._catalog = this.addChild({
             name: 'catalog',
             options: {
                 childrenData: catalogData,
-                onItemSelected: id => this.showItem(id),
-                onItemUnselected: () => this.hideItem(),
-                onAddToCart: name => {
-                    this._minicart.addItem(name);
-                    this._minicart.render();
-                }
+                onElementPicked: link => this.showItem(link.dataset.url),                
+                onAddToCart
             }
         });
 
-        this._viewer = this.addChild({
-            name: 'view'
+        this._fullview = this.addChild({
+            name: 'fullview',
+            options: {
+                onItemUnselected: () => this.hideItem(),
+                onAddToCart
+            }
         });
 
         this._minicart = this.addChild({
@@ -45,22 +52,30 @@ export default class Page extends ComponentMap {
                     this._catalog.render();
                 }
             }
-        });
+        });        
 
         this._activeSubComponent = this._catalog;
         this.render();
     }
 
-    showItem(id) {
-        this._catalog.hide();
-        this._viewer.setItem(ItemService.getItem(id))
-        this._viewer.show();
-        this._viewer.render();
-        this._activeSubComponent = this._viewer;
+    showItem(url) {
+        abortAndFetchJSON(url + '.json')
+            .then( data => {
+                this._catalog.hide();
+                this._filter.hide();
+                this._fullview.data = data;
+                this._fullview.show();
+                this._fullview.render();
+                this._activeSubComponent = this._fullview;
+            })
+            .catch((err) => {
+                console.warn(err)
+            });
     }
 
     hideItem() {
-        this._viewer.hide();
+        this._fullview.hide();
+        this._filter.show();
         this._catalog.show();
         this._catalog.render();
         this._activeSubComponent = this._catalog;
@@ -73,9 +88,4 @@ export default class Page extends ComponentMap {
         this._catalog.setFilter(this._filter.getValues());
         this._activeSubComponent.render();
     }
-
-    mapChild(child) {
-        return child.dataAttributes;
-    }
-
 }

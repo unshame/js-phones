@@ -17,7 +17,6 @@ export default class ComponentCollection extends Component {
     }
 
     addChild({
-        constructor,
         name, id, tag,
         options = {}
     }) {

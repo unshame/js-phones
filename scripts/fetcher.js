@@ -1,18 +1,21 @@
 let timestamp = null;
 
-function fetchJSON(url, callback) {
+function fetchJSON(url) {
     return fetch(url)
         .then(response => {
             return response.json()
         });
 }
 
-function abortAndFetchJSON(url, callback) {
+function abortAndFetchJSON(url) {
     let curTimestamp = timestamp = Date.now();
-    fetchJSON(url, (obj) => {
+    return fetchJSON(url).then((obj) => {
+
         if (curTimestamp == timestamp) {
-            callback(obj);
+            return obj;
         }
+
+        return Promise.reject('Request aborted');
     })
 }
 
