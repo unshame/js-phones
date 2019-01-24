@@ -43,7 +43,7 @@ export default class Minicart extends Component {
         if(thumb) {
             let item = this.element.querySelectorAll('[data-element="item"]')[this._lastIndex];
             if(item) {
-                throwImage(thumb, item, thumb.src);
+                throwImage(thumb, item, thumb.src, true);
             }
         }
     }

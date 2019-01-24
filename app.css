@@ -111,6 +111,7 @@ h1 {
 .transitioning-img {
   position: absolute;
   transition: 
+    opacity 400ms linear,
     transform 400ms ease-out,
     width 400ms ease-out,
     height 400ms ease-out,

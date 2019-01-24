@@ -33,6 +33,7 @@ export default class Fullview extends ComponentMap {
             thumb,
             preview, 
             url, 
+            false,
             () => preview.src = url
         );
     }

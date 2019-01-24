@@ -1,4 +1,4 @@
-export default function throwImage(source, target, url, onComplete) {
+export default function throwImage(source, target, url, changeOpacity, onComplete) {
     let img = new Image(source.clientWidth, source.clientHeight);
     img.classList.add('transitioning-img');
 
@@ -8,6 +8,9 @@ export default function throwImage(source, target, url, onComplete) {
     let angle = Math.round(Math.random() * 60 + 100) * Math.sign(Math.random() - 0.5);
     img.style.transform = `rotate(${angle}deg)`;
     img.style.borderRadius = '50%';
+    if (changeOpacity) {
+        img.style.opacity = 1;
+    }
     img.src = url;
 
     document.body.appendChild(img);
@@ -20,6 +23,9 @@ export default function throwImage(source, target, url, onComplete) {
     let largeImgRect = target.getBoundingClientRect();
     img.style.top = target.clientTop + window.pageYOffset + largeImgRect.top + 'px';
     img.style.left = target.clientLeft + window.pageXOffset + largeImgRect.left + 'px';
+    if (changeOpacity) {
+        img.style.opacity = 0;
+    }
 
     img.addEventListener('transitionend', () => {
         setTimeout(() => {
