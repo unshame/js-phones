@@ -7,7 +7,7 @@ export default class Preview extends ElementPicker {
         super({ element, template, data, onElementPicked });
         this.element.addEventListener('click', (event) => {
             if (event.target.closest('[data-action="add-to-cart"]')) {
-                onAddToCart(this.data.name);
+                onAddToCart(this.data.name, this.element.querySelector('[data-element="preview"]'));
                 event.preventDefault();
             }
         });

@@ -15,9 +15,9 @@ export default class Page extends ComponentMap {
 
         this.setAutoRenderOptions({ render: false });
         
-        let onAddToCart = (name) => {
+        let onAddToCart = (name, thumb) => {
             this._minicart.addItem(name);
-            this._minicart.render();
+            this._minicart.render(thumb);
         }
 
         this._catalog = this.addChild({
