@@ -1,4 +1,5 @@
 /* app css stylesheet */
+
 .js-hidden {
   display: none;
 }
@@ -44,12 +45,12 @@ body {
 }
 
 /** Detail View **/
+
 img.phone {
   float: left;
   margin-right: 3em;
   margin-bottom: 2em;
   background-color: white;
-  padding: 2em;
   height: 400px;
   width: 400px;
   display: none;
@@ -58,7 +59,6 @@ img.phone {
 img.phone:first-child {
   display: block;
 }
-
 
 ul.phone-thumbs {
   margin: 0;
@@ -82,7 +82,6 @@ ul.phone-thumbs img:hover {
   cursor: pointer;
 }
 
-
 ul.specs {
   clear: both;
   margin: 0;
@@ -90,13 +89,13 @@ ul.specs {
   list-style: none;
 }
 
-ul.specs > li{
+ul.specs>li {
   display: inline-block;
   width: 200px;
   vertical-align: top;
 }
 
-ul.specs > li > span{
+ul.specs>li>span {
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -107,4 +106,15 @@ ul.specs dt {
 
 h1 {
   border-bottom: 1px solid gray;
+}
+
+.transitioning-img {
+  position: absolute;
+  transition: 
+    transform 400ms ease-out,
+    width 400ms ease-out,
+    height 400ms ease-out,
+    top 400ms cubic-bezier(.14, .84, .54, 1.21),
+    left 400ms ease-out,
+    border-radius 400ms ease-in;
 }

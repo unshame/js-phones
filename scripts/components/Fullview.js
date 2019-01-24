@@ -9,7 +9,7 @@ export default class Fullview extends ComponentMap {
             name: 'element-picker',
             options: {
                 data: data ? data.images : null,
-                onElementPicked: (image) => this.setPreviewUrl(image.dataset.url)
+                onElementPicked: (thumb) => this.changePreview(thumb)
             }
         })
 
@@ -25,10 +25,37 @@ export default class Fullview extends ComponentMap {
         });
     }
 
-    setPreviewUrl(url) {
-        this.element
-            .querySelector('[data-element="preview"]')
-            .setAttribute('src', url);
+    changePreview(thumb) {
+        let url = thumb.dataset.url;
+        let largeImg = this.element.querySelector('[data-element="preview"]');
+        let img = new Image(thumb.clientWidth, thumb.clientHeight);
+        img.classList.add('transitioning-img');
+
+        let thumbRect = thumb.getBoundingClientRect();
+        img.style.top = thumb.clientTop + window.pageYOffset + thumbRect.top + 'px';
+        img.style.left = thumb.clientLeft + window.pageXOffset + thumbRect.left + 'px';
+        let angle = Math.round(Math.random() * 60 + 100) * Math.sign(Math.random() - 0.5);
+        img.style.transform = `rotate(${angle}deg)`;
+        img.style.borderRadius = '50%';
+        img.src = url;
+
+        document.body.appendChild(img);
+
+        img.style.width = largeImg.clientWidth - largeImg.clientLeft + 'px';
+        img.style.height = largeImg.clientHeight - largeImg.clientTop + 'px';
+        img.style.transform = '';
+        img.style.borderRadius = '15px';
+
+        let largeImgRect = largeImg.getBoundingClientRect();
+        img.style.top = largeImg.clientTop + window.pageYOffset + largeImgRect.top + 'px';
+        img.style.left = largeImg.clientLeft + window.pageXOffset + largeImgRect.left + 'px';
+
+        img.addEventListener('transitionend', () => {
+            setTimeout(() => {
+                largeImg.src = img.src;
+                img.remove();
+            }, 50);
+        });
     }
 
     set data(data) {
