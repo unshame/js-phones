@@ -1,5 +1,9 @@
 export default function template(data) {
-    let lis = data.map(({ name, amount }) => `<li data-item-name="${name}" data-element="item">${name} (${amount})</li>`);
+    let lis = data.map(({ name, amount }) => `
+    <li class="minicart-item"
+        data-action="pick"
+        data-item-name="${name}"
+        data-element="item">${name} (${amount})</li>`);
     return `
         <p>Shopping Cart</p>
         <ul>

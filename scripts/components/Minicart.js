@@ -1,17 +1,14 @@
 import defaultTemplate from '../templates/minicart.js';
-import Component from '../Component.js';
 import throwImage from '../image-thrower.js';
+import ElementPicker from './ElementPicker.js';
 
-export default class Minicart extends Component {
+export default class Minicart extends ElementPicker {
 
     constructor({ element, data = [], template = defaultTemplate }) {
-        super({ element, data, template });
-        this.element.addEventListener('mousedown', (event) => {
-            let li = event.target.closest('li[data-item-name]');
-            if (li) {
+        super({ element, data, template, 
+            onElementPicked: (li) => {
                 this.removeItem(li.dataset.itemName);
                 this.render();
-                event.preventDefault();
             }
         });
         this._lastIndex = 0;
@@ -46,5 +43,9 @@ export default class Minicart extends Component {
                 throwImage(thumb, item, thumb.src, true);
             }
         }
+    }
+
+    get defaultTag() {
+        return 'div';
     }
 }
