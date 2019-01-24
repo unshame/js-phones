@@ -33,7 +33,7 @@ export default class Page extends ComponentMap {
             name: 'fullview'
         });
 
-        this._fullview.subscribe('itemUnselected', () => this.hideItem());
+        this._fullview.subscribe('close', () => this.hideItem());
         this._fullview.subscribe('addToCart', onAddToCart);
 
         this._minicart = this.addChild({

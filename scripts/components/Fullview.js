@@ -21,7 +21,7 @@ export default class Fullview extends ComponentMap {
                 event.preventDefault();
             }
             else if (event.target.closest('[data-action="back"]')) {
-                this.dispatch('itemUnselected');
+                this.dispatch('close');
                 event.preventDefault();
             }
         });
