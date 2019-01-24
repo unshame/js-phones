@@ -49,8 +49,4 @@ export default class Fullview extends ComponentMap {
     get data() {
         return super.data;
     }
-
-    render() {
-        super.render();
-    }
 }
