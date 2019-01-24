@@ -23,19 +23,18 @@ export default class Page extends ComponentMap {
         this._catalog = this.addChild({
             name: 'catalog',
             options: {
-                childrenData: catalogData,
-                onElementPicked: link => this.showItem(link.dataset.url),                
-                onAddToCart
+                childrenData: catalogData
             }
         });
+        this._catalog.subscribe('elementPicked', link => this.showItem(link.dataset.url));
+        this._catalog.subscribe('addToCart', onAddToCart);
 
         this._fullview = this.addChild({
-            name: 'fullview',
-            options: {
-                onItemUnselected: () => this.hideItem(),
-                onAddToCart
-            }
+            name: 'fullview'
         });
+
+        this._fullview.subscribe('itemUnselected', () => this.hideItem());
+        this._fullview.subscribe('addToCart', onAddToCart);
 
         this._minicart = this.addChild({
             name: 'minicart',
@@ -46,13 +45,13 @@ export default class Page extends ComponentMap {
             name: 'filter',
             tag: 'section',
             options: {
-                childrenData: filterData,
-                onChange: (values) => {
-                    this._catalog.setFilter(values);
-                    this._catalog.render();
-                }
+                childrenData: filterData
             }
-        });        
+        });
+        this._filter.subscribe('change', (values) => {
+            this._catalog.setFilter(values);
+            this._catalog.render();
+        });
 
         this._activeSubComponent = this._catalog;
         this.render();

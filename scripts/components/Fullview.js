@@ -3,24 +3,25 @@ import ComponentMap from "../ComponentMap.js";
 import throwImage from '../image-thrower.js'
 
 export default class Fullview extends ComponentMap {
-    constructor({ element, data, template = defaultTemplate, onItemUnselected, onAddToCart }) {
+    constructor({ element, data, template = defaultTemplate }) {
         super({ element, data, template });
         
         this._elementPicker = this.addChild({
             name: 'element-picker',
             options: {
-                data: data ? data.images : null,
-                onElementPicked: (thumb) => this.changePreview(thumb)
+                data: data ? data.images : null
             }
-        })
+        });
+
+        this._elementPicker.subscribe('elementPicked', (thumb) => this.changePreview(thumb));
 
         this.element.addEventListener('click', (event) => {
             if (event.target.closest('[data-action="add-to-cart"]')) {
-                onAddToCart(this.data.name, this.element.querySelector('[data-element="preview"]'));
+                this.dispatch('addToCart', this.data.name, this.element.querySelector('[data-element="preview"]'));
                 event.preventDefault();
             }
             else if (event.target.closest('[data-action="back"]')) {
-                onItemUnselected();
+                this.dispatch('itemUnselected');
                 event.preventDefault();
             }
         });
@@ -33,9 +34,9 @@ export default class Fullview extends ComponentMap {
             thumb,
             preview, 
             url, 
-            false,
-            () => preview.src = url
-        );
+            false
+        )
+        .then(() => preview.src = url);
     }
 
     set data(data) {

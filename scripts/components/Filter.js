@@ -3,23 +3,27 @@ import defaultTemplate from '../templates/filter.js'
 
 export default class Filter extends ComponentMap {
 
-    constructor({ element, childrenData: { attributes }, template = defaultTemplate, onChange }) {
+    constructor({ element, childrenData: { attributes }, template = defaultTemplate }) {
         super({ element, template });
 
         this._searchField = this.addChild({
-            name: 'search-field',
-            options: {
-                onChange: () => onChange(this.getValues())
-            }
+            name: 'search-field'
         });
+        this._searchField.subscribe(
+            'change', 
+            () => this.dispatch('change', this.getValues())
+        );
 
         this._selectField = this.addChild({
             name: 'select-field',
             options: {
-                data: attributes,
-                onChange: () => onChange(this.getValues())
+                data: attributes
             }
-        })
+        });
+        this._selectField.subscribe(
+            'change',
+            () => this.dispatch('change', this.getValues())
+        );
     }
 
     getValues() {

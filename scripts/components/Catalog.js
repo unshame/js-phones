@@ -3,15 +3,17 @@ import defaultTemplate from '../templates/catalog.js';
 
 export default class Catalog extends ComponentArray {
 
-    constructor({ element, childrenData = [], template = defaultTemplate, onElementPicked, onAddToCart }) {
+    constructor({ element, childrenData = [], template = defaultTemplate }) {
         super({ element, template });
 
         for (let datum of childrenData) {
-            this.addChild({
+            let child = this.addChild({
                 name: 'preview',
                 id: datum.id,
-                options: { data: datum, onElementPicked, onAddToCart }
+                options: { data: datum, }
             });
+            child.bubble(this, 'elementPicked');
+            child.bubble(this, 'addToCart');
         }
 
         this._filters = {};

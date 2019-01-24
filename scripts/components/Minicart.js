@@ -5,12 +5,11 @@ import ElementPicker from './ElementPicker.js';
 export default class Minicart extends ElementPicker {
 
     constructor({ element, data = [], template = defaultTemplate }) {
-        super({ element, data, template, 
-            onElementPicked: (li) => {
-                this.removeItem(li.dataset.itemName);
-                this.render();
-            }
-        });
+        super({ element, data, template });
+        this.subscribe('elementPicked', (li) => {
+            this.removeItem(li.dataset.itemName);
+            this.render();
+        })
         this._lastIndex = 0;
     }
 

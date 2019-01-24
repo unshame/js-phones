@@ -6,9 +6,9 @@ function defaultTemplate(data) {
 
 export default class SelectField extends Component {
 
-    constructor({ element, data, template = defaultTemplate, onChange }) {
+    constructor({ element, data, template = defaultTemplate }) {
         super({ element, data, template });
-        this.element.addEventListener('change', (event) => onChange(this.element.value, event));
+        this.element.addEventListener('change', (event) => this.dispatch('change', this.element.value, event));
     }
 
     get defaultTag() {

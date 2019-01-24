@@ -1,10 +1,13 @@
-export default class Component {
+import EventEmitter from "./EventEmitter.js";
+
+export default class Component extends EventEmitter {
     constructor({ 
         element,
         data = {},
         template = () => '',
         hiddenClass = 'js-hidden'
     }) {
+        super();
         this._ownsElement = !(element instanceof Element);
         this.element = this._ownsElement ? this._createElement(element) : element;
         this._data = data;
