@@ -13,5 +13,5 @@ export default function(data) {
         
         <a href="#!${url}" data-url="${url}" data-action="pick">${data.name}</a>
         
-        <p>${data.snippet}</p>`
+        <p>${data.snippet}</p>`;
 }

@@ -3,22 +3,22 @@ import defaultTemplate from '../templates/page.js';
 import { abortAndFetchJSON } from '../fetcher.js';
 
 export default class Page extends ComponentMap {
-    constructor({ 
+    constructor({
         element,
-        childrenData: { 
+        childrenData: {
             catalogData = [],
             filterData = []
-        }, 
+        },
         template = defaultTemplate
     }) {
         super({ element, template });
 
         this.setAutoRenderOptions({ render: false });
-        
+
         let onAddToCart = (name, thumb) => {
             this._minicart.addItem(name);
             this._minicart.render(thumb);
-        }
+        };
 
         this._catalog = this.addChild({
             name: 'catalog',
@@ -39,7 +39,7 @@ export default class Page extends ComponentMap {
         this._minicart = this.addChild({
             name: 'minicart',
             tag: 'section'
-        })
+        });
 
         this._filter = this.addChild({
             name: 'filter',
@@ -68,7 +68,7 @@ export default class Page extends ComponentMap {
                 this._activeSubComponent = this._fullview;
             })
             .catch((err) => {
-                console.warn(err)
+                console.warn(err);
             });
     }
 

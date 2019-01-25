@@ -1,7 +1,7 @@
-import EventEmitter from "./EventEmitter.js";
+import EventEmitter from './EventEmitter.js';
 
 export default class Component extends EventEmitter {
-    constructor({ 
+    constructor({
         element,
         data = {},
         template = () => '',
@@ -66,4 +66,4 @@ export default class Component extends EventEmitter {
     get defaultTag() {
         return 'div';
     }
-} 
+}

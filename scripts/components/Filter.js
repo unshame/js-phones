@@ -1,5 +1,5 @@
-import ComponentMap from "../ComponentMap.js";
-import defaultTemplate from '../templates/filter.js'
+import ComponentMap from '../ComponentMap.js';
+import defaultTemplate from '../templates/filter.js';
 
 export default class Filter extends ComponentMap {
 
@@ -10,7 +10,7 @@ export default class Filter extends ComponentMap {
             name: 'search-field'
         });
         this._searchField.subscribe(
-            'change', 
+            'change',
             () => this.dispatch('change', this.getValues())
         );
 

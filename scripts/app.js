@@ -20,4 +20,4 @@ Promise.all([
         },
         urlBase
     });
-})
+});

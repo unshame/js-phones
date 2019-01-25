@@ -1,4 +1,4 @@
-import ComponentCollection from "./ComponentCollection.js";
+import ComponentCollection from './ComponentCollection.js';
 
 export default class ComponentArray extends ComponentCollection {
 

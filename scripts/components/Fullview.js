@@ -1,11 +1,11 @@
-import defaultTemplate from '../templates/fullview.js'
-import ComponentMap from "../ComponentMap.js";
-import throwImage from '../image-thrower.js'
+import defaultTemplate from '../templates/fullview.js';
+import ComponentMap from '../ComponentMap.js';
+import throwImage from '../image-thrower.js';
 
 export default class Fullview extends ComponentMap {
     constructor({ element, data, template = defaultTemplate }) {
         super({ element, data, template });
-        
+
         this._elementPicker = this.addChild({
             name: 'element-picker',
             options: {
@@ -32,8 +32,8 @@ export default class Fullview extends ComponentMap {
         let url = thumb.dataset.url;
         throwImage(
             thumb,
-            preview, 
-            url, 
+            preview,
+            url,
             false
         )
         .then(() => preview.src = url);

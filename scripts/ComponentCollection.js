@@ -1,4 +1,4 @@
-import Component from "./Component.js";
+import Component from './Component.js';
 import newComponent from './new-component.js';
 
 export default class ComponentCollection extends Component {
@@ -23,9 +23,9 @@ export default class ComponentCollection extends Component {
         options.element = { tag, name, id };
         let component = new newComponent(name, options);
         let dataId = id ? `data-component-id="${id}"` : '';
-        let componentInfo = { 
-            component, name, id, 
-            selector: `[data-component="${name}"]${dataId ? '[' + dataId + ']' : ''}`, 
+        let componentInfo = {
+            component, name, id,
+            selector: `[data-component="${name}"]${dataId ? '[' + dataId + ']' : ''}`,
             dataAttributes: `data-component="${name}"${dataId ? ' ' + dataId : ''}`
         };
         this.children.push(componentInfo);
@@ -68,9 +68,9 @@ export default class ComponentCollection extends Component {
             let node = this.element.querySelector(selector);
 
             if(node) {
-                
+
                 if (!hasBeenEmbedded) {
-                    
+
                     for (let attribute of node.attributes) {
                         component.element.setAttribute(attribute.name, attribute.value);
                     }

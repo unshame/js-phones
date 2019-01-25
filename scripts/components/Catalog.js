@@ -45,8 +45,8 @@ export default class Catalog extends ComponentArray {
             let a = String(ca.data[order]).toLowerCase();
             let b = String(cb.data[order]).toLowerCase();
 
-            if (a > b) return 1;
-            if (a < b) return -1;
+            if (a > b) {return 1;}
+            if (a < b) {return -1;}
             return 0;
         });
 

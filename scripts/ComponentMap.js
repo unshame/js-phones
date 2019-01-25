@@ -1,4 +1,4 @@
-import ComponentCollection from "./ComponentCollection.js";
+import ComponentCollection from './ComponentCollection.js';
 
 export default class ComponentMap extends ComponentCollection {
 
@@ -14,7 +14,7 @@ export default class ComponentMap extends ComponentCollection {
         return {
             ...data,
             ...super.data,
-        }
+        };
     }
 
     set data(data) {

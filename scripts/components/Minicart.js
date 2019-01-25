@@ -9,7 +9,7 @@ export default class Minicart extends ElementPicker {
         this.subscribe('elementPicked', (li) => {
             this.removeItem(li.dataset.itemName);
             this.render();
-        })
+        });
         this._lastIndex = 0;
     }
 

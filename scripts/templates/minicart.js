@@ -8,5 +8,5 @@ export default function template(data) {
         <p>Shopping Cart</p>
         <ul>
             ${lis.length > 0 ? lis.join('') : '<li>So empty...</li>'}
-        </ul>`
+        </ul>`;
 }

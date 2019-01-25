@@ -1,5 +1,5 @@
 import defaultTemplate from '../templates/preview.js';
-import ElementPicker from "./ElementPicker.js";
+import ElementPicker from './ElementPicker.js';
 
 export default class Preview extends ElementPicker {
 

@@ -7,5 +7,5 @@ export default function template(data) {
     return `
         <ul class="phone-thumbs">
             ${imgs.join('')}
-        </ul>`
+        </ul>`;
 }

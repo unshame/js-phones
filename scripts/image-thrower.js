@@ -34,6 +34,6 @@ export default function throwImage(source, target, url, changeOpacity, onComplet
                 resolve();
             }, 50);
         });
-    })
+    });
 
 }

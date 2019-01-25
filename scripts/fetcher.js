@@ -3,7 +3,7 @@ let timestamp = null;
 function fetchJSON(url) {
     return fetch(url)
         .then(response => {
-            return response.json()
+            return response.json();
         });
 }
 
@@ -16,7 +16,7 @@ function abortAndFetchJSON(url) {
         }
 
         return Promise.reject('Request aborted');
-    })
+    });
 }
 
 export default fetchJSON;

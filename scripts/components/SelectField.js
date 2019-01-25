@@ -1,4 +1,4 @@
-import Component from "../Component.js";
+import Component from '../Component.js';
 
 function defaultTemplate(data) {
     return data.map(({ name, value }) => `<option value="${value}">${name}</option>`).join('');

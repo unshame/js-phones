@@ -15,5 +15,5 @@ export default function template(data) {
                 <div ${data.catalog}></div>
                 <div ${data.fullview}></div>
             </div>
-        </div>`
+        </div>`;
 }

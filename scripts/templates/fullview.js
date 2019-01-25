@@ -13,5 +13,5 @@ export default function template(data) {
 
         <p>${data.description}</p>
 
-        <ul class="phone-thumbs" ${data['element-picker']}></ul>`
+        <ul class="phone-thumbs" ${data['element-picker']}></ul>`;
 }
