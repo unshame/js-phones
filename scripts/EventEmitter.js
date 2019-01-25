@@ -1,7 +1,7 @@
 export default class EventEmitter {
 
     constructor() {
-        this._events = {};
+        this._events = Object.create(null);
     }
 
     subscribe(eventName, listener) {
