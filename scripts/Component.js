@@ -30,11 +30,11 @@ export default class Component extends EventEmitter {
     }
 
     render() {
-        this.element.innerHTML = this.generateHTML();
+        this.element.innerHTML = this.generateHTML(this.data);
     }
 
-    generateHTML() {
-        return this._template(this.data);
+    generateHTML(data) {
+        return this._template(data);
     }
 
     hide() {
