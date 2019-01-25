@@ -6,7 +6,7 @@ Promise.all([
     loadComponents()
 ]).then(([items]) => {
     let urlBase = './phones/';
-    items.forEach(item => item.urlBase = urlBase)
+    items.forEach(item => item.urlBase = urlBase);
     window.page = newComponent('page', {
         element: document.querySelector('[data-page-container]'),
         childrenData: {

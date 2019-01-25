@@ -51,6 +51,8 @@ export default class Component extends EventEmitter {
         if (alwaysRemove || this._ownsElement) {
             this.element.remove();
         }
+
+        super.destroy();
     }
 
     set data(data) {
