@@ -8,7 +8,7 @@ export default class Test extends Component {
             minicart: '',
             catalog: '',
             fullview: ''
-        }
+        };
         this.render();
     }
 }
