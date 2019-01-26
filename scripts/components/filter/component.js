@@ -10,7 +10,7 @@ export default class Filter extends ComponentMap {
         });
         this._searchField.subscribe(
             'change',
-            () => this.dispatch('change', this.getValues())
+            () => void this.dispatch('change', this.getValues())
         );
 
         this._selectField = this.addChild({
@@ -21,7 +21,7 @@ export default class Filter extends ComponentMap {
         });
         this._selectField.subscribe(
             'change',
-            () => this.dispatch('change', this.getValues())
+            () => void this.dispatch('change', this.getValues())
         );
     }
 

@@ -1,22 +1,19 @@
 let timestamp = null;
 
-function fetchJSON(url) {
-    return fetch(url)
-        .then(response => {
-            return response.json();
-        });
+async function fetchJSON(url) {
+    let response = await fetch(url);
+    return await response.json();
 }
 
-function abortAndFetchJSON(url) {
+async function abortAndFetchJSON(url) {
     let curTimestamp = timestamp = Date.now();
-    return fetchJSON(url).then((obj) => {
+    let obj = await fetchJSON(url);
 
-        if (curTimestamp == timestamp) {
-            return obj;
-        }
+    if (curTimestamp == timestamp) {
+        return obj;
+    }
 
-        return Promise.reject('Request aborted');
-    });
+    return Promise.reject('Request aborted');
 }
 
 export default fetchJSON;

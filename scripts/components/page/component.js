@@ -25,14 +25,14 @@ export default class Page extends ComponentMap {
                 childrenData: catalogData
             }
         });
-        this._catalog.subscribe('elementPicked', link => this.showItem(link.dataset.url));
+        this._catalog.subscribe('elementPicked', link => void this.showItem(link.dataset.url));
         this._catalog.subscribe('addToCart', onAddToCart);
 
         this._fullview = this.addChild({
             name: 'fullview'
         });
 
-        this._fullview.subscribe('close', () => this.hideItem());
+        this._fullview.subscribe('close', () => void this.hideItem());
         this._fullview.subscribe('addToCart', onAddToCart);
 
         this._minicart = this.addChild({
@@ -56,19 +56,26 @@ export default class Page extends ComponentMap {
         this.render();
     }
 
-    showItem(url) {
-        abortAndFetchJSON(url + '.json')
-            .then( data => {
-                this._catalog.hide();
-                this._filter.hide();
-                this._fullview.data = data;
-                this._fullview.show();
-                this._fullview.render();
-                this._activeSubComponent = this._fullview;
-            })
-            .catch((err) => {
-                console.warn(err);
-            });
+    async showItem(url) {
+        let data;
+
+        try {
+            data = await abortAndFetchJSON(url + '.json');
+        }
+        catch(err) {
+            console.warn(err);
+        }
+
+        if (!data) {
+            return;
+        }
+
+        this._catalog.hide();
+        this._filter.hide();
+        this._fullview.data = data;
+        this._fullview.show();
+        this._fullview.render();
+        this._activeSubComponent = this._fullview;
     }
 
     hideItem() {

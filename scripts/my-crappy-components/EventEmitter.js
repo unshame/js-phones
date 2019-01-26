@@ -43,7 +43,7 @@ export default class EventEmitter {
     }
 
     bubble(eventEmitter, eventName, ...args) {
-        this.subscribe(eventName, (...moreArgs) => eventEmitter.dispatch(eventName, ...args, ...moreArgs));
+        this.subscribe(eventName, (...moreArgs) => void eventEmitter.dispatch(eventName, ...args, ...moreArgs));
     }
 
     destroy() {

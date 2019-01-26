@@ -12,7 +12,7 @@ export default class Fullview extends ComponentMap {
             }
         });
 
-        this._elementPicker.subscribe('elementPicked', (thumb) => this.changePreview(thumb));
+        this._elementPicker.subscribe('elementPicked', (thumb) => void this.changePreview(thumb));
 
         this.element.addEventListener('click', (event) => {
             if (event.target.closest('[data-action="add-to-cart"]')) {
@@ -26,16 +26,16 @@ export default class Fullview extends ComponentMap {
         });
     }
 
-    changePreview(thumb) {
+    async changePreview(thumb) {
         let preview = this.element.querySelector('[data-element="preview"]');
         let url = thumb.dataset.url;
-        throwImage(
+        await throwImage(
             thumb,
             preview,
             url,
             false
-        )
-        .then(() => preview.src = url);
+        );
+        preview.src = url;
     }
 
     set data(data) {
