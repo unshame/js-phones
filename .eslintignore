@@ -1,1 +1,3 @@
 scripts/my-crappy-components/component-loader.js
+*.js
+node_modules/**/*

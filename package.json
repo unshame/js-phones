@@ -1,0 +1,26 @@
+{
+  "name": "js-phones",
+  "version": "1.0.0",
+  "description": "Static pages of phone catalogue",
+  "main": "index.html",
+  "scripts": {
+    "prod": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unshame/js-phones.git"
+  },
+  "author": "UnShame",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unshame/js-phones/issues"
+  },
+  "homepage": "https://github.com/unshame/js-phones#readme",
+  "dependencies": {
+    "my-crappy-components": "git+https://github.com/unshame/my-crappy-components.git"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "merge-stream": "^1.0.1"
+  }
+}
