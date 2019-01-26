@@ -9,9 +9,12 @@ export default class Preview extends Component {
                 this.dispatch('addToCart', this.data.name, this.element.querySelector('[data-element="preview"]'));
                 event.preventDefault();
             }
-            else if (event.target.closest('[data-action="select"]')) {
-                this.dispatch('select', event.target);
-                event.preventDefault();
+            else {
+                let link = event.target.closest('[data-action="select"]');
+                if(link) {
+                    this.dispatch('select', link);
+                    event.preventDefault();
+                }
             }
         });
     }
