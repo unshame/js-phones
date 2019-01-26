@@ -25,7 +25,7 @@ export default class Page extends ComponentMap {
                 childrenData: catalogData
             }
         });
-        this._catalog.subscribe('elementPicked', link => void this.showItem(link.dataset.url));
+        this._catalog.subscribe('select', link => void this.showItem(link.dataset.url));
         this._catalog.subscribe('addToCart', onAddToCart);
 
         this._fullview = this.addChild({

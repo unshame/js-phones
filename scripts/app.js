@@ -1,49 +1,8 @@
-import componentLoader, { loadAndCreateComponent } from './my-crappy-components/component-loader.js';
+import componentLoader, { loadAndCreateComponent } from './my-crappy-components/index.js';
 import fetchJSON from './fetcher.js';
+import components from './components.js';
 
-componentLoader({
-    'catalog': {
-        path: '/scripts/components/catalog/',
-        dependencies: ['preview']
-    },
-    'filter': {
-        path: '/scripts/components/filter/',
-        dependencies: [
-            'search-field',
-            'select-field'
-        ]
-    },
-    'minicart': {
-        path: '/scripts/components/minicart/'
-    },
-    'page': {
-        path: '/scripts/components/page/',
-        dependencies: [
-            'catalog',
-            'fullview',
-            'minicart',
-            'filter'
-        ]
-    },
-    'preview': {
-        path: '/scripts/components/preview/'
-    },
-    'search-field': {
-        path: '/scripts/components/search-field/',
-    },
-    'select-field': {
-        path: '/scripts/components/select-field/',
-    },
-    'fullview': {
-        path: '/scripts/components/fullview/',
-        dependencies: [
-            'element-picker'
-        ]
-    },
-    'element-picker': {
-        path: '/scripts/components/element-picker/'
-    }
-});
+componentLoader(components);
 
 initPage();
 

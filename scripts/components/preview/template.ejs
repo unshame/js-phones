@@ -1,0 +1,14 @@
+<% let url = urlBase + id %>
+<a href="#!<%- url %>" data-url="<%- url %>" class="thumb" data-action="select">
+    <img alt="<%- name %>" src="<%- imageUrl %>" data-element="preview">
+</a>
+
+<div class="phones__btn-buy-wrapper">
+    <a class="btn btn-success" data-action="add-to-cart">
+        Add
+    </a>
+</div>
+
+<a href="#!<%- url %>" data-url="<%- url %>" data-action="select"><%- name %></a>
+
+<p><%- snippet %></p>

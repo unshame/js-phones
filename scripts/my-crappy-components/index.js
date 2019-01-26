@@ -2,11 +2,11 @@ import Component from './Component.js';
 import ComponentCollection from './ComponentCollection.js';
 import ComponentMap from './ComponentMap.js';
 import ComponentArray from './ComponentArray.js';
-import componentLoader, { 
+import componentLoader, {
     loadComponent,
     loadAndCreateComponent,
     createComponent
-} from './component-loader';
+} from './component-loader.js';
 
 export default componentLoader;
 

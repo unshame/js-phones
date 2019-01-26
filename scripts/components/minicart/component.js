@@ -3,7 +3,7 @@ import ElementPicker from '../element-picker/component.js';
 
 export default class Minicart extends ElementPicker {
 
-    constructor({ element, data = [], template }) {
+    constructor({ element, data = { elements: [] }, template }) {
         super({ element, data, template });
         this.subscribe('elementPicked', (li) => {
             this.removeItem(li.dataset.itemName);
@@ -13,23 +13,25 @@ export default class Minicart extends ElementPicker {
     }
 
     addItem(name, thumb) {
-        let item = this.data.find(item => item.name == name);
+        let cart = this.data.elements;
+        let item = cart.find(item => item.name == name);
         if (item) {
             item.amount++;
-            this._lastIndex = this.data.indexOf(item);
+            this._lastIndex = cart.indexOf(item);
         }
         else {
-            this.data.push({ name, amount: 1 });
-            this._lastIndex = this.data.length - 1;
+            cart.push({ name, amount: 1 });
+            this._lastIndex = cart.length - 1;
         }
     }
 
     removeItem(name) {
-        let index = this.data.findIndex(item => item.name == name);
-        let item = this.data[index];
+        let cart = this.data.elements;
+        let index = cart.findIndex(item => item.name == name);
+        let item = cart[index];
         item.amount--;
         if (item.amount === 0) {
-            this.data.splice(index, 1);
+            cart.splice(index, 1);
         }
     }
 

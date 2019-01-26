@@ -8,7 +8,9 @@ export default class Fullview extends ComponentMap {
         this._elementPicker = this.addChild({
             name: 'element-picker',
             options: {
-                data: data ? data.images : null
+                data:  {
+                    elements: data ? data.images : null
+                }
             }
         });
 
@@ -41,7 +43,7 @@ export default class Fullview extends ComponentMap {
     set data(data) {
         super.data = data;
         if(data) {
-            this._elementPicker.data = data.images;
+            this._elementPicker.data.elements = data.images;
         }
     }
 

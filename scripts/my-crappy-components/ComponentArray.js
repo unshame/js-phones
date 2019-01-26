@@ -6,9 +6,11 @@ export default class ComponentArray extends ComponentCollection {
         super({ element, data, template });
     }
 
-    get data() {
-        let data = this.filterChildren(this.children).map(child => this.mapChild(child));
-        return Object.assign(data, super.data);
+    getRenderData() {
+        let data = {
+            children: this.filterChildren(this.children).map(child => this.mapChild(child))
+        };
+        return Object.assign(data, super.getRenderData());
     }
 
     filterChildren(children) {
@@ -16,6 +18,6 @@ export default class ComponentArray extends ComponentCollection {
     }
 
     mapChild(child) {
-        return child;
+        return child.dataAttributes;
     }
 }

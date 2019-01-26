@@ -9,9 +9,9 @@ export default class Catalog extends ComponentArray {
             let child = this.addChild({
                 name: 'preview',
                 id: datum.id,
-                options: { data: datum, }
+                options: { data: datum }
             });
-            child.bubble(this, 'elementPicked');
+            child.bubble(this, 'select');
             child.bubble(this, 'addToCart');
         }
 

@@ -16,7 +16,9 @@ export default class Filter extends ComponentMap {
         this._selectField = this.addChild({
             name: 'select-field',
             options: {
-                data: attributes
+                data: {
+                    elements: attributes
+                }
             }
         });
         this._selectField.subscribe(
@@ -31,9 +33,4 @@ export default class Filter extends ComponentMap {
             order: this._selectField.element.value
         };
     }
-
-    mapChild(child) {
-        return child.dataAttributes;
-    }
-
 }

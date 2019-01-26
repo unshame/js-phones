@@ -30,7 +30,7 @@ export default class Component extends EventEmitter {
     }
 
     render() {
-        this.element.innerHTML = this.generateHTML(this.data);
+        this.element.innerHTML = this.generateHTML(this.getRenderData());
     }
 
     generateHTML(data) {
@@ -60,6 +60,10 @@ export default class Component extends EventEmitter {
     }
 
     get data() {
+        return this._data;
+    }
+
+    getRenderData() {
         return this._data;
     }
 

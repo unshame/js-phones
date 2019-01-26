@@ -1,15 +1,17 @@
 import Component from './Component.js';
 
-let components = null;
+const ejs = window.ejs;
+let useEjs = !!ejs;
+const components = {};
 
-export default function setDefinitions(_components) {
-    components = _components;
+export default function setDefinitions(_components, _useEjs = useEjs) {
+    Object.assign(components, _components);
+    useEjs = _useEjs;
 }
 
 async function loadComponent(name) {
-    console.log(`Loading component '${name}'`);
     let componentInfo = components[name];
-    let { path, dependencies } = componentInfo;
+    let { path, dependencies, noTemplate } = componentInfo;
 
     if (dependencies) {
 
@@ -22,13 +24,26 @@ async function loadComponent(name) {
     }
 
     let componentPath = path + 'component.js';
-    let templatePath = path + 'template.js';
     let component = (await import(componentPath)).default;
     let template;
-    try {
-        template = (await import(templatePath)).default;
+
+    if (!noTemplate) {
+        let templatePath = path + 'template';
+
+        if (useEjs) {
+            let response = await fetch(templatePath + '.ejs');
+            if (response.ok) {
+                let text = await response.text();
+                template = ejs.compile(text);
+            }
+            else {
+                throw new Error('Template not found');
+            }
+        }
+        else {
+            template = (await import(templatePath + '.js')).default;
+        }
     }
-    catch(err){}
 
     Object.assign(componentInfo, {component, template});
 
