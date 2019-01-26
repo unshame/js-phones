@@ -23,12 +23,12 @@ async function loadComponent(name) {
         }
     }
 
-    let componentPath = path + 'component.js';
+    let componentPath = location.pathname + path + 'component.js';
     let component = (await import(componentPath)).default;
     let template;
 
     if (!noTemplate) {
-        let templatePath = path + 'template';
+        let templatePath = location.pathname + path + 'template';
 
         if (useEjs) {
             let response = await fetch(templatePath + '.ejs');

@@ -1,20 +1,20 @@
 export default {
     'catalog': {
-        path: '/scripts/components/catalog/',
+        path: 'scripts/components/catalog/',
         dependencies: ['preview']
     },
     'filter': {
-        path: '/scripts/components/filter/',
+        path: 'scripts/components/filter/',
         dependencies: [
             'search-field',
             'select-field'
         ]
     },
     'minicart': {
-        path: '/scripts/components/minicart/'
+        path: 'scripts/components/minicart/'
     },
     'page': {
-        path: '/scripts/components/page/',
+        path: 'scripts/components/page/',
         dependencies: [
             'catalog',
             'fullview',
@@ -23,22 +23,22 @@ export default {
         ]
     },
     'preview': {
-        path: '/scripts/components/preview/'
+        path: 'scripts/components/preview/'
     },
     'search-field': {
-        path: '/scripts/components/search-field/',
+        path: 'scripts/components/search-field/',
         noTemplate: true
     },
     'select-field': {
-        path: '/scripts/components/select-field/',
+        path: 'scripts/components/select-field/',
     },
     'fullview': {
-        path: '/scripts/components/fullview/',
+        path: 'scripts/components/fullview/',
         dependencies: [
             'element-picker'
         ]
     },
     'element-picker': {
-        path: '/scripts/components/element-picker/'
+        path: 'scripts/components/element-picker/'
     }
 };
