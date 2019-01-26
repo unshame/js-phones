@@ -1,9 +1,4 @@
 export default function template(data) {
-    let imgs = data.images.map(img => `
-        <li>
-            <img src="${img}">
-        </li>`);
-
     return `
         <img class="phone" src="${data.images[0]}" data-element="preview">
         <button data-action="back">Back</button>

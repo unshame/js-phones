@@ -1,4 +1,4 @@
-import Component from '../Component.js';
+import Component from '../../my-crappy-components/Component.js';
 
 export default class SearchField extends Component {
 

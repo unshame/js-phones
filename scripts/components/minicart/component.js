@@ -1,10 +1,9 @@
-import defaultTemplate from '../templates/minicart.js';
-import throwImage from '../image-thrower.js';
-import ElementPicker from './ElementPicker.js';
+import throwImage from '../../image-thrower.js';
+import ElementPicker from '../element-picker/component.js';
 
 export default class Minicart extends ElementPicker {
 
-    constructor({ element, data = [], template = defaultTemplate }) {
+    constructor({ element, data = [], template }) {
         super({ element, data, template });
         this.subscribe('elementPicked', (li) => {
             this.removeItem(li.dataset.itemName);

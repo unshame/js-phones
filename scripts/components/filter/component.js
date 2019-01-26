@@ -1,9 +1,8 @@
-import ComponentMap from '../ComponentMap.js';
-import defaultTemplate from '../templates/filter.js';
+import ComponentMap from '../../my-crappy-components/ComponentMap.js';
 
 export default class Filter extends ComponentMap {
 
-    constructor({ element, childrenData: { attributes }, template = defaultTemplate }) {
+    constructor({ element, childrenData: { attributes }, template }) {
         super({ element, template });
 
         this._searchField = this.addChild({

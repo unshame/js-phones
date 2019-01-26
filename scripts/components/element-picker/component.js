@@ -1,9 +1,8 @@
-import Component from '../Component.js';
-import defaultTemplate from '../templates/element-picker.js';
+import Component from '../../my-crappy-components/Component.js';
 
 export default class ElementPicker extends Component {
 
-    constructor({ element, data, template = defaultTemplate }) {
+    constructor({ element, data, template }) {
         super({ element, data, template });
         this.element.addEventListener('click', (event) => {
             let target = event.target.closest('[data-action="pick"]');

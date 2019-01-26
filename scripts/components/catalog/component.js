@@ -1,9 +1,8 @@
-import ComponentArray from '../ComponentArray.js';
-import defaultTemplate from '../templates/catalog.js';
+import ComponentArray from '../../my-crappy-components/ComponentArray.js';
 
 export default class Catalog extends ComponentArray {
 
-    constructor({ element, childrenData = [], template = defaultTemplate }) {
+    constructor({ element, childrenData = [], template }) {
         super({ element, template });
 
         for (let datum of childrenData) {

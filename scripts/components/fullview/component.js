@@ -1,9 +1,8 @@
-import defaultTemplate from '../templates/fullview.js';
-import ComponentMap from '../ComponentMap.js';
-import throwImage from '../image-thrower.js';
+import ComponentMap from '../../my-crappy-components/ComponentMap.js';
+import throwImage from '../../image-thrower.js';
 
 export default class Fullview extends ComponentMap {
-    constructor({ element, data, template = defaultTemplate }) {
+    constructor({ element, data, template }) {
         super({ element, data, template });
 
         this._elementPicker = this.addChild({

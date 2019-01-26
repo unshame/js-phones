@@ -1,6 +1,5 @@
-import ComponentMap from '../ComponentMap.js';
-import defaultTemplate from '../templates/page.js';
-import { abortAndFetchJSON } from '../fetcher.js';
+import ComponentMap from '../../my-crappy-components/ComponentMap.js';
+import { abortAndFetchJSON } from '../../fetcher.js';
 
 export default class Page extends ComponentMap {
     constructor({
@@ -9,7 +8,7 @@ export default class Page extends ComponentMap {
             catalogData = [],
             filterData = []
         },
-        template = defaultTemplate
+        template
     }) {
         super({ element, template });
 

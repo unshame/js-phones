@@ -1,9 +1,8 @@
-import defaultTemplate from '../templates/preview.js';
-import ElementPicker from './ElementPicker.js';
+import ElementPicker from '../element-picker/component.js';
 
 export default class Preview extends ElementPicker {
 
-    constructor({ element, data, template = defaultTemplate }) {
+    constructor({ element, data, template }) {
         super({ element, template, data });
         this.element.addEventListener('click', (event) => {
             if (event.target.closest('[data-action="add-to-cart"]')) {
