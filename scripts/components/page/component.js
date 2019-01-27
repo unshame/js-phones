@@ -1,4 +1,4 @@
-import ComponentMap from '../../my-crappy-components/ComponentMap.js';
+import { ComponentMap } from 'my-crappy-components';
 import { abortAndFetchJSON } from '../../fetcher.js';
 
 export default class Page extends ComponentMap {

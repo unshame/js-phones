@@ -1,4 +1,4 @@
-import Component from '../../my-crappy-components/Component.js';
+import { Component } from 'my-crappy-components';
 
 export default class Preview extends Component {
 

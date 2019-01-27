@@ -1,4 +1,4 @@
-import ComponentMap from '../../my-crappy-components/ComponentMap.js';
+import { ComponentMap } from 'my-crappy-components';
 import throwImage from '../../image-thrower.js';
 
 export default class Fullview extends ComponentMap {

@@ -1,4 +1,4 @@
-import componentLoader, { loadAndCreateComponent } from './my-crappy-components/index.js';
+import componentLoader, { loadAndCreateComponent } from 'my-crappy-components';
 import fetchJSON from './fetcher.js';
 import components from './components.js';
 

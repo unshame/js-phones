@@ -1,4 +1,4 @@
-import ComponentMap from '../../my-crappy-components/ComponentMap.js';
+import { ComponentMap } from 'my-crappy-components';
 
 export default class Filter extends ComponentMap {
 

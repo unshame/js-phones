@@ -1,44 +1,23 @@
-export default {
-    'catalog': {
-        path: 'scripts/components/catalog/',
-        dependencies: ['preview']
-    },
-    'filter': {
-        path: 'scripts/components/filter/',
-        dependencies: [
-            'search-field',
-            'select-field'
-        ]
-    },
-    'minicart': {
-        path: 'scripts/components/minicart/'
-    },
-    'page': {
-        path: 'scripts/components/page/',
-        dependencies: [
-            'catalog',
-            'fullview',
-            'minicart',
-            'filter'
-        ]
-    },
-    'preview': {
-        path: 'scripts/components/preview/'
-    },
-    'search-field': {
-        path: 'scripts/components/search-field/',
-        noTemplate: true
-    },
-    'select-field': {
-        path: 'scripts/components/select-field/',
-    },
-    'fullview': {
-        path: 'scripts/components/fullview/',
-        dependencies: [
-            'element-picker'
-        ]
-    },
-    'element-picker': {
-        path: 'scripts/components/element-picker/'
-    }
+import * as catalog from './components/catalog';
+import * as elementPicker from './components/element-picker';
+import * as filter from './components/filter';
+import * as fullview from './components/fullview';
+import * as minicart from './components/minicart';
+import * as page from './components/page';
+import * as preview from './components/preview';
+import * as searchField from './components/search-field';
+import * as selectField from './components/select-field';
+
+const components = {
+    catalog,
+    'element-picker': elementPicker,
+    filter,
+    fullview,
+    minicart,
+    page,
+    preview,
+    'search-field': searchField,
+    'select-field': selectField
 };
+
+export default components;

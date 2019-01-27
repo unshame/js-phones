@@ -1,4 +1,4 @@
-import { Component } from '../../my-crappy-components/index.js';
+import { Component } from 'my-crappy-components';
 
 export default class Test extends Component {
     constructor(options) {

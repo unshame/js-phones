@@ -1,4 +1,4 @@
-import ComponentArray from '../../my-crappy-components/ComponentArray.js';
+import { ComponentArray } from 'my-crappy-components';
 
 export default class Catalog extends ComponentArray {
 

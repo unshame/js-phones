@@ -1,11 +1,11 @@
 const gulp = require('gulp');
+const webpack = require('webpack-stream');
 const merge = require('merge-stream');
 
 gulp.task('default', (cb) => {
     let content = gulp.src([
         './img/**/*',
         './phones/*',
-        './scripts/**/*',
         './index.html',
         './app.css'
     ], {
@@ -13,12 +13,24 @@ gulp.task('default', (cb) => {
     })
     .pipe(gulp.dest('./dist'));
 
-    let modules = gulp.src([
-        './node_modules/my-crappy-components/*.js'
-    ], {
-        base: './node_modules'
-    })
-    .pipe(gulp.dest('./dist/scripts'));
+    let bundle = gulp.src([
+        './scripts/app.js'
+    ])
+    .pipe(webpack({
+        mode: 'development',
+        module: {
+            rules: [
+                {
+                    test: /\.ejs$/,
+                    use: 'raw-loader'
+                }
+            ]
+        },
+        output: {
+            filename: 'app.js',
+        }
+    }))
+    .pipe(gulp.dest('./dist/scripts'))
 
-    return merge(content, modules);
+    return merge(content, bundle);
 });
