@@ -4,7 +4,7 @@
   "description": "Static pages of phone catalogue",
   "main": "index.html",
   "scripts": {
-    "prod": "gulp"
+    "prod": "npm update my-crappy-components && gulp"
   },
   "repository": {
     "type": "git",
