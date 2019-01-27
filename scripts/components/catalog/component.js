@@ -1,12 +1,15 @@
 import { ComponentArray } from 'my-crappy-components';
+import Preview from '../preview/component.js';
+import defaultTemplate from './template.ejs';
 
 export default class Catalog extends ComponentArray {
 
-    constructor({ element, childrenData = [], template }) {
+    constructor({ element, childrenData = [], template = defaultTemplate }) {
         super({ element, template });
 
         for (let datum of childrenData) {
             let child = this.addChild({
+                component: Preview,
                 name: 'preview',
                 id: datum.id,
                 options: { data: datum }

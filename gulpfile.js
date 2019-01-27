@@ -19,6 +19,8 @@ gulp.task('default', (cb) => {
     .pipe(webpack({
         mode: 'development',
         module: {
+
+            // load .ejs templates as string
             rules: [
                 {
                     test: /\.ejs$/,
@@ -28,6 +30,11 @@ gulp.task('default', (cb) => {
         },
         output: {
             filename: 'app.js',
+        },
+
+        // serve {} as fs to ejs
+        node: {
+            fs: 'empty'
         }
     }))
     .pipe(gulp.dest('./dist/scripts'))

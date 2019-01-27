@@ -1,15 +1,12 @@
-import componentLoader, { loadAndCreateComponent } from 'my-crappy-components';
 import fetchJSON from './fetcher.js';
-import components from './components.js';
-
-componentLoader(components);
+import Page from './components/page/component.js';
 
 initPage();
 
 async function initPage() {
     let phones = await fetchJSON('./phones/phones.json');
     phones.forEach(phone => phone.urlBase = location.pathname + 'phones/');
-    window.page = await loadAndCreateComponent('page', {
+    window.page = new Page({
         element: document.querySelector('[data-page-container]'),
         childrenData: {
             catalogData: phones,

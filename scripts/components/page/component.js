@@ -1,5 +1,11 @@
 import { ComponentMap } from 'my-crappy-components';
+import Catalog from '../catalog/component.js';
+import Minicart from '../minicart/component.js';
+import Filter from '../filter/component.js';
+import Fullview from '../fullview/component.js'
+
 import { abortAndFetchJSON } from '../../fetcher.js';
+import defaultTemplate from './template.ejs';
 
 export default class Page extends ComponentMap {
     constructor({
@@ -8,7 +14,7 @@ export default class Page extends ComponentMap {
             catalogData = [],
             filterData = []
         },
-        template
+        template = defaultTemplate
     }) {
         super({ element, template });
 
@@ -20,6 +26,7 @@ export default class Page extends ComponentMap {
         };
 
         this._catalog = this.addChild({
+            component: Catalog,
             name: 'catalog',
             options: {
                 childrenData: catalogData
@@ -29,6 +36,7 @@ export default class Page extends ComponentMap {
         this._catalog.subscribe('addToCart', onAddToCart);
 
         this._fullview = this.addChild({
+            component: Fullview,
             name: 'fullview'
         });
 
@@ -36,11 +44,13 @@ export default class Page extends ComponentMap {
         this._fullview.subscribe('addToCart', onAddToCart);
 
         this._minicart = this.addChild({
+            component: Minicart,
             name: 'minicart',
             tag: 'section'
         });
 
         this._filter = this.addChild({
+            component: Filter,
             name: 'filter',
             tag: 'section',
             options: {
