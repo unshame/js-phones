@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/unshame/js-phones#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "my-crappy-components": "git+https://github.com/unshame/my-crappy-components.git"
   },
   "devDependencies": {
     "gulp": "^4.0.0",
     "merge-stream": "^1.0.1",
-    "raw-loader": "^1.0.0",
     "webpack": "^4.29.0",
     "webpack-stream": "^5.2.1"
   }

@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const webpack = require('webpack-stream');
 const merge = require('merge-stream');
+const path = require('path');
 
 gulp.task('default', (cb) => {
     let content = gulp.src([
@@ -24,7 +25,7 @@ gulp.task('default', (cb) => {
             rules: [
                 {
                     test: /\.ejs$/,
-                    use: 'raw-loader'
+                    loader: path.join(__dirname, 'ejs-loader.js')
                 }
             ]
         },
