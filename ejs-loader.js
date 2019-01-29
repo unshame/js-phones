@@ -1,3 +1,11 @@
+const ejs = require('ejs');
+
 module.exports = function (source) {
-    return 'import ejs from "ejs"; export default ejs.compile(`' + source.replace(/\`/g, '\\`') + '`)';
+
+    let template = ejs.compile(source, {
+        strict: false,
+        client: true
+    });
+
+    return `module.exports = ${template}`;
 }
