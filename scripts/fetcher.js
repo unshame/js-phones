@@ -13,7 +13,7 @@ async function abortAndFetchJSON(url) {
         return obj;
     }
 
-    return Promise.reject('Request aborted');
+    throw new Error('Request aborted');
 }
 
 export default fetchJSON;
